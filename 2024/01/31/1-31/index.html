@@ -19,13 +19,13 @@
     <meta name="description" content="数组54. 螺旋矩阵 - 力扣（LeetCode） 递归的一种写法不会让人一下子就能想得到 123456789101112131415161718192021222324252627class Solution &amp;#123;    public List&lt;Integer&gt; spiralOrder(int[][] matrix) &amp;#123;        List&lt;Integer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数组篇3">
-<meta property="og:url" content="https://kyclnx.github.io/2024/01/30/1-31/index.html">
+<meta property="og:url" content="https://kyclnx.github.io/2024/01/31/1-31/index.html">
 <meta property="og:site_name" content="kyclnx">
 <meta property="og:description" content="数组54. 螺旋矩阵 - 力扣（LeetCode） 递归的一种写法不会让人一下子就能想得到 123456789101112131415161718192021222324252627class Solution &amp;#123;    public List&lt;Integer&gt; spiralOrder(int[][] matrix) &amp;#123;        List&lt;Integer">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i0.imgs.ovh/2024/01/30/KKiBV.jpeg">
-<meta property="article:published_time" content="2024-01-30T08:03:58.227Z">
-<meta property="article:modified_time" content="2024-01-31T14:41:09.773Z">
+<meta property="article:published_time" content="2024-01-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-26T14:33:31.121Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="杂项">
 <meta name="twitter:card" content="summary_large_image">
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-30 16:03" pubdate>
-          2024年1月30日 下午
+        <time datetime="2024-01-31 00:00" pubdate>
+          2024年1月31日 凌晨
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          441 字
+          1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          9 分钟
         
       </span>
     
@@ -281,10 +281,28 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">spiralOrder</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = matrix[<span class="hljs-number">0</span>].length - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, b = matrix.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Integer[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>[(r + <span class="hljs-number">1</span>)*(b + <span class="hljs-number">1</span>)];<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> l; i &lt;= r; i++) res[x++] = matrix[t][i];<span class="hljs-comment">//从左向右（变列数）</span><br>            <span class="hljs-keyword">if</span>(++t &gt; b) <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> t; i &lt;= b; i++) res[x++] = matrix[i][r];<span class="hljs-comment">//从上往下（变行数）</span><br>            <span class="hljs-keyword">if</span> (l &gt; --r) <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> r; i &gt;= l; i--) res[x++] = matrix[b][i];<span class="hljs-comment">//从右向左</span><br>            <span class="hljs-keyword">if</span> (t &gt; --b) <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> b; i &gt;= t; i--) res[x++] = matrix[i][l];<span class="hljs-comment">//从下向上</span><br>            <span class="hljs-keyword">if</span>(++l &gt; r) <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> Arrays.asList(res);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">59. 螺旋矩阵 II - 力扣（LeetCode）</a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] generateMatrix(<span class="hljs-type">int</span> n) &#123;<br>        <span class="hljs-type">int</span>[][] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n][n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, end = n*n;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, b = n - <span class="hljs-number">1</span>, l = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (start &lt;= end)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> l; i &lt;= r; i++) ans[t][i] = start++;<br>            t++;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> t; i &lt;= b; i++) ans[i][r] = start++;<br>            r--;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> r; i &gt;= l; i--) ans[b][i] = start++;<br>            b--;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> b; i &gt;= t; i--) ans[i][l] = start++;<br>            l++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/diagonal-traverse/">498. 对角线遍历 - 力扣（LeetCode）</a></p>
+<p>因为沿着对角线遍历只会面临两种情况，向着右上角遍历或者向着左下角进行遍历，所以创建一个direct ，当它&#x3D;1的时候，它沿着右上角方向进行遍历，，当它等于-1的时候它沿着左下角方向进行遍历。<em><strong>此题目对于越界情况的处理及其巧妙</strong></em></p>
+<blockquote>
+<ul>
+<li>右上方越界情况处理：只考虑列数情况</li>
+<li>左下方越界情况处理： 只考虑行数情况</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] findDiagonalOrder(<span class="hljs-type">int</span>[][] mat) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length, n = mat[<span class="hljs-number">0</span>].length, cnt = m*n;<br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[cnt];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, y = <span class="hljs-number">0</span>, direct = <span class="hljs-number">1</span>, flag = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(flag &lt; cnt)&#123;<br>            ans[flag] = mat[x][y];<br>            flag++;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, ny = <span class="hljs-number">0</span>;<br>            <span class="hljs-comment">//direct = 1沿着右上角的方向进行遍历</span><br>            <span class="hljs-keyword">if</span>(direct == <span class="hljs-number">1</span>)&#123;<br>                <span class="hljs-comment">//行数减一</span><br>                nx = x - <span class="hljs-number">1</span>;<br>                <span class="hljs-comment">//列数加一</span><br>                ny = y + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(direct == -<span class="hljs-number">1</span>)&#123;<br>                <span class="hljs-comment">//行数加一</span><br>                nx = x + <span class="hljs-number">1</span>;<br>                <span class="hljs-comment">//列数减一</span><br>                ny = y - <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-comment">//处理越界的情况</span><br>            <span class="hljs-keyword">if</span>(nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n)&#123;<br>                <span class="hljs-comment">//右上方的越界情况处理，在这里其实已经越界了只是对其进行处理</span><br>                <span class="hljs-keyword">if</span>(direct == <span class="hljs-number">1</span>)&#123;<br>                    nx = y + <span class="hljs-number">1</span> &lt; n ? x : x + <span class="hljs-number">1</span>;<br>                    ny = y + <span class="hljs-number">1</span> &lt; n ? y + <span class="hljs-number">1</span> : y;<br>                &#125;<br>                <span class="hljs-comment">//左下方的越界情况处理</span><br>                <span class="hljs-keyword">else</span>&#123;<br>                    nx = x + <span class="hljs-number">1</span> &lt; m ? x + <span class="hljs-number">1</span> : x;<br>                    ny = x + <span class="hljs-number">1</span> &lt; m ? y : y + <span class="hljs-number">1</span>;<br>                &#125;<br>                <span class="hljs-comment">//越界变方向</span><br>                direct *=  -<span class="hljs-number">1</span>;<br>            &#125;<br>            x = nx;<br>            y = ny;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>但是它为啥只会对增加的那一个方向判断</p>
+<p>再写了一遍我明白了，就以向着右上方遍历为例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-keyword">if</span>(direct == <span class="hljs-number">1</span>)&#123;<br>    nx = y + <span class="hljs-number">1</span> &lt; n ? x : x + <span class="hljs-number">1</span>;<br>    ny = y + <span class="hljs-number">1</span> &lt; n ? y + <span class="hljs-number">1</span> : y;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>你向着右上方进行遍历如果越界了x 肯定会 &lt; 0，所以下一步遍历就只有两种情况，向着正右边遍历或者向着正下面遍历（就只是以现在的方向为基准） </p>
+<p>同时左下方遍历也同样是此道理。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reshape-the-matrix/submissions/499328906/">566. 重塑矩阵 - 力扣（LeetCode）</a></p>
+<p>有意思的简单题目</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] matrixReshape(<span class="hljs-type">int</span>[][] mat, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> c) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mat[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">if</span>(r*c != m*n) <span class="hljs-keyword">return</span> mat;<br>        <span class="hljs-type">int</span>[][] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[r][c];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, col = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++)&#123;<br>                <span class="hljs-keyword">if</span>(col == c)&#123;<br>                    col = <span class="hljs-number">0</span>;<br>                    row++;<br>                &#125;<br>                ans[row][col] = mat[i][j];<br>                col++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -334,7 +352,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>数组篇3</div>
-      <div>https://kyclnx.github.io/2024/01/30/1-31/</div>
+      <div>https://kyclnx.github.io/2024/01/31/1-31/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +364,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月30日</div>
+          <div>2024年1月31日</div>
         </div>
       
       
