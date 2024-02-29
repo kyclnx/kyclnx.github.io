@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kyclnx/image/3gbizhiCom-1708239438.jpg">
 <meta property="article:published_time" content="2024-02-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-28T13:30:56.376Z">
+<meta property="article:modified_time" content="2024-02-29T09:09:54.667Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          384 字
+          2k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          17 分钟
         
       </span>
     
@@ -282,7 +282,57 @@
 <h2 id="2-1-物理层的基本概念"><a href="#2-1-物理层的基本概念" class="headerlink" title="2.1 物理层的基本概念"></a>2.1 物理层的基本概念</h2><p>物理层考虑的是怎样才能在连接各种计算机的传输媒体上传输数据比特流，而不是具体的传输媒体。现有计算机网络传输媒体种类繁多，通信手段也有许多不同的方式。物理层的作用正是要尽可能地屏蔽这些传输媒体和通信手段的差异，使得物理层上面的数据链路层感觉不到这些差异，这样就可以使得数据链路层只考虑如何完成本层的协议和服务，而不必考虑具体的传输媒体和通信手段是什么。</p>
 <p>数据在计算机内部采用并行传输的方式，但是在数据通信线路（传输媒体）上的传输方式一般都是串行传输（经济上考虑），即逐个比特按照时间顺序传输，因此物理层还要完成传输方式的转换。</p>
 <p>具体的物理层协议种类较多。这是因为物理连接方式很多（点对点、多点连接、广播连接），而传输媒体的种类也非常多（双绞线、同轴电缆、光缆）。</p>
-<h2 id="2-2-数据通信的基础知识"><a href="#2-2-数据通信的基础知识" class="headerlink" title="2.2 数据通信的基础知识"></a>2.2 数据通信的基础知识</h2><h3 id="2-2-1-数据通信的系统模型"><a href="#2-2-1-数据通信的系统模型" class="headerlink" title="2.2.1 数据通信的系统模型"></a>2.2.1 数据通信的系统模型</h3>
+<h2 id="2-2-数据通信的基础知识"><a href="#2-2-数据通信的基础知识" class="headerlink" title="2.2 数据通信的基础知识"></a>2.2 数据通信的基础知识</h2><h3 id="2-2-1-数据通信的系统模型"><a href="#2-2-1-数据通信的系统模型" class="headerlink" title="2.2.1 数据通信的系统模型"></a>2.2.1 数据通信的系统模型</h3><p>如图所示，一个数据通信系统可划分为三大部分，即<strong>源系统</strong>(或发送端、发送方)、<strong>传输系统</strong>(或传输网络)和<strong>目的系统</strong>(或接收端、接收方)。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kyclnx/image/20240229155138.png" srcset="/img/loading.gif" lazyload></p>
+<p>根据信号中代表消息的参数取值方式不同，信号可分为以下两大类：</p>
+<p>（1）<strong>模拟信号</strong>，或<strong>连续信号</strong>—代表消息的参数取值是连续的。如图中用户家中的调制解调器到电话端局之间的用户线上传输的就是模拟信号。</p>
+<p>（2）<strong>数字信号</strong>，或<strong>离散信号</strong>—代表消息的参数取值是离散的。如图用户家中的计算机到调制解调器之间或在电话网中继线上传送的就是数字信号。在使用时间域(或简称为时域)的波形表示数字值号时，代表不同离散数值的基本波形就称为<em><strong>码元</strong></em>，在使用二进制编码时，只有两种不同的码元，一种代表0状态而另一.种代表1状态。</p>
+<h3 id="2-2-2-有关信道的几个基本概念"><a href="#2-2-2-有关信道的几个基本概念" class="headerlink" title="2.2.2 有关信道的几个基本概念"></a>2.2.2 有关信道的几个基本概念</h3><p><strong>（1）单向通信</strong>：又称为单工通信，即只能有一个方向通信而没有反方向的交互。无线广播或者有线广播以及电视广播就是属于这种类型。</p>
+<p><strong>（2）双向交替通信</strong>：又称为半双工通信，即通信的双方都可以发送信息，但不能双方同时发送信息（当然也就不能同时接收）。这种通信方式是一方发送，另一方接收，过一段时间后可以再反过来。</p>
+<p><strong>（3）双向同时通信</strong>：又称为全双工通信，即通信双方可以同时发送和接收消息。</p>
+<p>单向通信只需要一条信道，而双向交替通信或双向同时通信都需要两条信道（每个方向各一条）。双向同时通信的效率最高。</p>
+<p>来自信源的信号常称为<em><strong>基带信号</strong></em>(即基本频带信号)。像计算机输出的代表各种文字野图像文件的数据信号都属于基带信号。基带信号往往包含较多的低频分量，其至有直流分重，而许乡信道并不能传输这种低频分量或直流分量。为了解决这一问题，就必须对基带信号进行***调制(modulation)***。</p>
+<p>调制可分为两大类。一类是仅仅对基带信号的波形进行变换，使它能够与信道特性相适应。变换后的信号仍然是基带信号。这类调制称为<em><strong>基带调制</strong></em>。由于这种基带调制是把数字信号转换为另一种形式的数字信号，因此大家更愿意把这种过程称为<em><strong>编码(coding)<em><strong>。另一类调制则需要使用</strong></em>载波(carier)<em><strong>进行调制，把基带信号的频率范围搬移到较高的频段，并转换为模拟信号，这样就能够更好地在模拟信道中传输。经过载波调制后的信号称为</strong></em>带通信号</strong></em>(即仅在一段频率范围内能够通过信道)，而使用载波的调制称为<em><strong>带通调制</strong></em>。</p>
+<p><strong>（1）常用的编码方式</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/kyclnx/image/20240229164231.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
+
+<ul>
+<li><p><strong>不归零制</strong>: 正电平代表1,负电平代表0。</p>
+</li>
+<li><p><strong>归零制</strong>: 正脉冲代表1,负脉冲代表0。</p>
+</li>
+<li><p><strong>曼彻斯特编码</strong>: 位周期中心的向上跳变代表0,位周期中心的向下跳变代表1。但也可反过来定义。</p>
+</li>
+<li><p><strong>差分曼彻斯特编码</strong>: 在每一位的中心处始终都有跳变。位开始边界有跳变代表0,而位开始边界没有跳变代表1。</p>
+</li>
+</ul>
+<p>从信号波形中可以看出，曼彻斯特(Manchester)编码产生的信号频率比不归零制高。从自同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率(这叫作没有自同步能力)，而曼彻斯特编码具有自同步能力。</p>
+<p><strong>(2)基本的带通调制方法</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/kyclnx/image/20240229164643.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+
+<ul>
+<li><p>**调幅(AM)**，即载波的振幅随基带数字信号而变化。例如，0或1分别对应于无载波或有载波输出。</p>
+</li>
+<li><p><strong>调频</strong>(FM),即载波的频率随基带数字信号而变化。例如，0或1分别对应于频率fr或f2。</p>
+</li>
+<li><p><strong>调相</strong>(PM)，即载波的初始相位随基带数字信号而变化。例如，0或1分别对应于相位0度或180度。</p>
+</li>
+</ul>
+<h3 id="2-2-3-信道的极限容量"><a href="#2-2-3-信道的极限容量" class="headerlink" title="2.2.3 信道的极限容量"></a>2.2.3 信道的极限容量</h3><p>码元的传输速率越高、信号传输的距离越远、噪声干扰越大或媒体传输质量越差，在接收端波形失真就越严重。</p>
+<p><strong>（1）信道能够通过的频率范围</strong></p>
+<p>在接收端收到的波形失去了码元的清晰界限。这种现象称为<strong>码间串扰</strong></p>
+<p><strong>奈氏准则</strong>：在宽带为W的低通信道中，若不考虑噪声影响，码元的传输速率最高速率是2W，传输超过此上限，就会出现严重的码间串扰问题，使得接收端对码元的识别成为不可能。</p>
+<p>信噪比就是信号的平均功率和噪声的平均功率之比，即：S&#x2F;N。</p>
+<p>香农公式指出：信道的极限传输速率C是: C &#x3D; W log2(1+S&#x2F;N) bit&#x2F;s</p>
+<p>香农公式表明，信道的带宽或者信道中的信噪比越大，信息的极限传输速率就越高。</p>
+<h2 id="2-3-物理层下面的传输媒体"><a href="#2-3-物理层下面的传输媒体" class="headerlink" title="2.3 物理层下面的传输媒体"></a>2.3 物理层下面的传输媒体</h2><p><strong>传输媒体</strong>也称为传输介质或传输媒介，它就是数据传输系统中在发送器和接收器之间的物理通路。传输媒体可分为两大类，即<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong>(这里的“导引型”的英文就是guided, 也可译为“导向传输媒体”)。在导引型传输媒体中，电磁波被导引沿着固体媒体(铜线或光纤)传播:而非导引型传输媒体就是指自由空间，在非导引型传输媒体中电磁波的传输常称为无线传输。</p>
+<h3 id="2-3-1-导引型传输媒体"><a href="#2-3-1-导引型传输媒体" class="headerlink" title="2.3.1  导引型传输媒体"></a>2.3.1  导引型传输媒体</h3><ol>
+<li>双绞线</li>
+<li>同轴电缆</li>
+<li>光缆</li>
+</ol>
+<h3 id="2-3-1-非导引型传输媒体"><a href="#2-3-1-非导引型传输媒体" class="headerlink" title="2.3.1 非导引型传输媒体"></a>2.3.1 非导引型传输媒体</h3><p>无线传输</p>
+<h2 id="2-4-信道复用技术"><a href="#2-4-信道复用技术" class="headerlink" title="2.4 信道复用技术"></a>2.4 信道复用技术</h2>
                 
               </div>
             
@@ -371,6 +421,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/02/29/2-29/" title="字符串篇一">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">字符串篇一</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
