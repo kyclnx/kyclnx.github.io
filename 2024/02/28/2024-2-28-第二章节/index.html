@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kyclnx/image/3gbizhiCom-1708239438.jpg">
 <meta property="article:published_time" content="2024-02-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-29T09:09:54.667Z">
+<meta property="article:modified_time" content="2024-03-02T03:17:16.949Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.4k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          17 分钟
+          21 分钟
         
       </span>
     
@@ -332,7 +332,13 @@
 <li>光缆</li>
 </ol>
 <h3 id="2-3-1-非导引型传输媒体"><a href="#2-3-1-非导引型传输媒体" class="headerlink" title="2.3.1 非导引型传输媒体"></a>2.3.1 非导引型传输媒体</h3><p>无线传输</p>
-<h2 id="2-4-信道复用技术"><a href="#2-4-信道复用技术" class="headerlink" title="2.4 信道复用技术"></a>2.4 信道复用技术</h2>
+<h2 id="2-4-信道复用技术"><a href="#2-4-信道复用技术" class="headerlink" title="2.4 信道复用技术"></a>2.4 信道复用技术</h2><h3 id="2-4-1-频分复用、时分复用、统计时分复用"><a href="#2-4-1-频分复用、时分复用、统计时分复用" class="headerlink" title="2.4.1 频分复用、时分复用、统计时分复用"></a>2.4.1 频分复用、时分复用、统计时分复用</h3><img src="https://s2.loli.net/2024/03/02/oPmB149JbgOerTy.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
+<p>最基本的复用就是<strong>频分复用FDM</strong>和<strong>时分复用TDM</strong>，频分复用的概念是这样的，有n路信号在一个信道中传送。可以使用调制的方法，将各路信号搬移到适当的频率，使得彼此不会产生干扰如图2-16(a)所示。 各路信号就在自己所分配到的信道中传送。可见频分复用的各路信号在同样的时间占用不同的带宽资源(请注意，这里的“带宽”是频率带宽而不是数据的发达速率)。而时分复用则是将时间划分为一段段等长的时分复用帧(即TDM帧)。每一路信号在每一个TDM帧中占用固定序号的时隙。为简单起见，在图2-16(b)中只画出了4路信号A,B, C和D,每一路信号所占用的时隙周期性地出现(其周期就是TDM帧的长度)。因此TDM信号也称为<strong>等时</strong>(isochronous)信号。可以看出，时分复用的所有用户是在不同的时间占用同样的频带宽度。这两种复用方法的优点是技术比较成熟，但缺点是不够灵活。时分复用则更有利于数字信号的传输。</p>
+<img src="https://s2.loli.net/2024/03/02/Rb3AyJUtZiDgIVe.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
+<p>在进行通信的时候，复用器和分用器总是成对的使用。在复用器和分用器之间的是用户共享的高速信道。分用器的作用和复用器的相反，它将高速信道传送过来的数据进行分用，分别交付到相应的用户。</p>
+<h3 id="2-4-2-波分复用"><a href="#2-4-2-波分复用" class="headerlink" title="2.4.2 波分复用"></a>2.4.2 波分复用</h3>
                 
               </div>
             
