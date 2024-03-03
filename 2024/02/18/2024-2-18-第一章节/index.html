@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i0.imgs.ovh/2024/02/17/obLo3.jpeg">
 <meta property="article:published_time" content="2024-02-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-27T14:47:16.956Z">
+<meta property="article:modified_time" content="2024-03-03T04:09:56.542Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -306,7 +306,7 @@
 <p>客户(client)和服务器(server)都是指通信中所涉及的两个应用进程。客户-服务器方式所描述的是进程之间服务和被服务的关系。在图1-5中，主机A运行客户程序而主机B运行服务器程序。在这种情况下，A是客户而B是服务器。客户A向服务器B发出请求服务，而服务器B向客户A提供服务。这里最主要的特征就是:</p>
 <p><strong>客户是服务请求方，服务器是服务提供方。</strong></p>
 <p>服务请求方和服务提供方都要使用网络核心部分所提供的服务。</p>
-<img src="https://cdn.jsdelivr.net/gh/kyclnx/image/qq_pic_merged_1709020753273.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+<img src="https://s2.loli.net/2024/03/03/LdslguOroDzAVy5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 
 <p>在实际应用中，客户程序和服务器程序通常还具有以下一些主要特点。</p>
 <p><strong>客户程序</strong>:</p>
@@ -325,7 +325,8 @@
 <p>电路交换的一个重要特点就是<strong>在通话的全部时间内，通话的两个用户始终占用端到端的通信资源</strong>。</p>
 <p>当使用电路交换来传送计算机数据的时候，其<strong>线路的传输效率很低</strong>，这是因为计算机数据是突发式的出现在传输线路上的，因此路线上真正用来传送数据的时间往往不到10%甚至1%已被占用的通信资源在绝大部分时间都是空闲的。例如，当用户阅读冬端屏幕上的信息或用键盘输入和编统一份文件时，或计算机正在进行处理而结果尚未返回宝贵的通信线路资源并未被利用而是被白白浪费了。</p>
 <h4 id="2-分组交换的特点"><a href="#2-分组交换的特点" class="headerlink" title="2. 分组交换的特点"></a>2. 分组交换的特点</h4><p>分组交换则采用<strong>存储转发</strong>的技术。图1-9 表示把一个报文划分为几个分组以后再进行传输。通常把要发送的整块数据称为一个<strong>报文</strong>先把较长的报文划分为一个个更小的等长数据段，例如，每个数据段为1024 bit。 在每一个数据段前面，加上一些必要的控制信息组成的首部(header)后，就构成了一个分组(packet)。分组又称为<strong>“包”</strong>，而分组的首部也可称为<strong>“包头”</strong>。分组是在互联网中传送的数据单元。分组中的“首部”是非常重要的，正是由于分组的首部包含了诸如目的地址和源地址等重要控制信息，每一个分组才能在互联网中独立地选择传输路径，并被正确地交付到分组传输的终点。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kyclnx/image/20240227215855.png" srcset="/img/loading.gif" lazyload></p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240303120516.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
 <p>互联网的核心部分是由许多网络和把它们互连起来的路由器组成的，而主机处在互联网的边缘部分。在互联网核心部分的路由器之间一般都用高速链路相连接，而在网络边缘部分的主机接入到核心部分则通常以相对较低速率的链路相连接。</p>
 <p>位于网络边缘部分的主机和位于网络核心部分的路由器都是计算机，但它们的作用却很不一样。主机是为用户进行信息处理的，并且可以和其他主机通过网络交换信息。路由器则用来转发分组，即进行分组交换。路由器收到一个分组，先暂时存储一下， 检查其首部，查找转发表，按照首部中的目的地址，找到合适的接口转发出去，把分组交给下一个路由器。这样一步步地(有时会经过几十个不同的路 由器)以存储转发的方式，把分组交付最终的目的主机。各路由器之间必须经常交换彼此掌握的路由信息，以便创建和动态维护路由器中的转发表，使得转发表在整个网络拓扑发生变化时及时更新。</p>
 <p>分组交换在传送数据之前不必先占用一条端到端的通信资源，分组在哪段链路上传送才占用那条链路的通信资源。分组到达路由器之后，先暂时存储下来，查找转发表，然后从另一条合适的链路转发出去。<strong>分组在传输时候就这样逐段地断续占用通信资源</strong>，省去了建立连接和释放连接的开销，因而数据的传输效率更高。</p>
@@ -333,7 +334,7 @@
 <p><strong>电路交换</strong>—整 个报文的比特流连续地从源点直达终点，好像在一个管道中传递。</p>
 <p><strong>报文交换</strong>—整个报文先传送到相邻节点， 全部存储下来后查找转发表，转发到下一个节点。</p>
 <p><strong>分组交换</strong>—单个分组 (这只是整个报文的一部分) 传送到相邻节点，存储下来后查找转发表，转发到下一个节点。</p>
-<img src="https://cdn.jsdelivr.net/gh/kyclnx/image/20240227221903.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+<img src="https://s2.loli.net/2024/03/03/qjbprhF6XxwPiGz.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
 
 <h2 id="1-6-计算机网络的性能"><a href="#1-6-计算机网络的性能" class="headerlink" title="1.6 计算机网络的性能"></a>1.6 计算机网络的性能</h2><h3 id="1-6-1-计算机网络的性能指标"><a href="#1-6-1-计算机网络的性能指标" class="headerlink" title="1.6.1 计算机网络的性能指标"></a>1.6.1 计算机网络的性能指标</h3><ol>
 <li><strong>速率</strong>：网络技术中的速率指的是数据传送速率速率的单位是bit&#x2F;s</li>
@@ -349,7 +350,7 @@
 <p>(2)语义，即需要发出何种控制信息，完成何种动作以及做出何种响应;</p>
 <p>(3)同步，即事件实现顺序的详细说明。</p>
 <h3 id="1-7-3具有五层协议的体系结构"><a href="#1-7-3具有五层协议的体系结构" class="headerlink" title="1.7.3具有五层协议的体系结构"></a>1.7.3具有五层协议的体系结构</h3><p>OSI的七层协议体系结构(如图1-16(a)所示)的概念清楚，理论也较完整，但它既复杂又不实用。TCP&#x2F;P 体系结构则不同，它现在得到了非常广泛的应用。TCP&#x2F;P 是一个四层的体系结构(如图所示)， 它包含应用层、运输层、网际层和链路层(网络接口层)。用网际层这个名字是强调本层解决不同网络的互连问题。在互联网的标准文档[RFC 1122, STD3]中，体系结构中的底层叫作链路层，但接着又说明了链路层就是媒体接入层。但也有把链路层称为网络接口层的[COME06]或子网层的[PETE12]。从实质上讲，TCP&#x2F;IP 只有最上面的三层，因为最下面的链路层并没有属于TCP&#x2F;IP体系的具体协议。链路层所使用的各种局域网标准，并非由IETF而是由IEEE的802委员会下属的各工作组负贵制定的。在讲授计算机网络原理时往往采取另外的办法，即综合OSI和TCPIP的优点，采用如图1-16(c)所示的五层协议的体系结构，这对阐述计算机网络的原理是十分方便的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kyclnx/image/20240227224647.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://s2.loli.net/2024/03/03/RgD7a1SFduPrikz.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
