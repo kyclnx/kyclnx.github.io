@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>字符串篇四</title>
+    <link href="/2024/03/10/3-11/"/>
+    <url>/2024/03/10/3-11/</url>
+    
+    <content type="html"><![CDATA[<h1 id="数字与字符间的转换"><a href="#数字与字符间的转换" class="headerlink" title="数字与字符间的转换"></a>数字与字符间的转换</h1><p><a href="https://leetcode.cn/problems/bulls-and-cows/description/">299. 猜数字游戏 - 力扣（LeetCode）</a></p><ul><li>这个题说白了还是统计字符类别的</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getHint</span><span class="hljs-params">(String secret, String guess)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">bulls</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span>[] cntS = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>];<br>        <span class="hljs-type">int</span>[] cntG = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; secret.length(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(secret.charAt(i) == guess.charAt(i)) ++bulls;<br>            <span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-comment">//这里相当于统计字符</span><br>                ++cntS[secret.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>];<br>                ++cntG[guess.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">cows</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; ++i)&#123;<br>            <span class="hljs-comment">//理解一个点cntG[i], cntS[i]在同一位置上的字符肯定是相等的</span><br>            cows += Math.min(cntG[i], cntS[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> Integer.toString(bulls) + <span class="hljs-string">&quot;A&quot;</span> + Integer.toString(cows) + <span class="hljs-string">&quot;B&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p><a href="https://leetcode.cn/problems/fizz-buzz/description/">412. Fizz Buzz - 力扣（LeetCode）</a></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">fizzBuzz</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        List&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) cur += <span class="hljs-string">&quot;Fizz&quot;</span>;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) cur += <span class="hljs-string">&quot;Buzz&quot;</span>;<br>            <span class="hljs-keyword">if</span> (cur.length() == <span class="hljs-number">0</span>) cur = i + <span class="hljs-string">&quot;&quot;</span>;<br>            ans.add(cur);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>字符串篇三</title>
     <link href="/2024/03/02/3-3/"/>
     <url>/2024/03/02/3-3/</url>
