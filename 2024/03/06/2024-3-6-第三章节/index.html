@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/03/02/OBj4U5ZMqiaoXKH.jpg">
 <meta property="article:published_time" content="2024-03-06T08:55:55.000Z">
-<meta property="article:modified_time" content="2024-03-13T10:15:47.687Z">
+<meta property="article:modified_time" content="2024-03-14T09:55:19.138Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          5.2k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          34 分钟
+          44 分钟
         
       </span>
     
@@ -385,6 +385,33 @@
 
 <p>但凡小于64字节的帧都是由于冲突而异常终止的无效帧。只要收到这种无效帧，就应当立即将其丢弃。</p>
 <p>先听后发、边听边发、冲突停止、延迟重发。</p>
+<h2 id="3-4-扩展的以太网"><a href="#3-4-扩展的以太网" class="headerlink" title="3.4 扩展的以太网"></a>3.4 扩展的以太网</h2><h3 id="3-4-1在物理层扩展以太网"><a href="#3-4-1在物理层扩展以太网" class="headerlink" title="3.4.1在物理层扩展以太网"></a>3.4.1在物理层扩展以太网</h3><h4 id="1-1-使用光纤扩展"><a href="#1-1-使用光纤扩展" class="headerlink" title="1.1 使用光纤扩展"></a>1.1 使用光纤扩展</h4><p>主机使用光纤和一对光纤调制解调器连接到集线器，很容易使主机和几公里以外的集线器相连接</p>
+<p><img src="https://s2.loli.net/2024/03/14/paMdziomKc1leJn.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="1-2-使用集线器扩展"><a href="#1-2-使用集线器扩展" class="headerlink" title="1.2 使用集线器扩展"></a>1.2 使用集线器扩展</h4><p>将多个以太网段连成更大的、多级星形结构的以太网，如某个部门有一系，二系，三系通过集线器扩展</p>
+<p><img src="https://s2.loli.net/2024/03/14/gNsDdUJurLZIjWH.png" srcset="/img/loading.gif" lazyload></p>
+<p>优点：</p>
+<p>1.使原来属于不同碰撞域的以太网上的计算机能够进行跨碰撞域的通信</p>
+<p>2.扩大了以太网覆盖的地理范围。</p>
+<p>缺点：</p>
+<p>1.碰撞域增大了，但总的吞吐量并未提高。</p>
+<p>2.如果不同的碰撞域使用不同的数据率，那么就不能用集线器将它们互连起来<br>碰撞域：碰撞域（collision domain）又称为冲突域，是指网络中一个站点发出的帧会与其他站点发出的帧产生碰撞或冲突的那部分网络碰撞域越大，发生碰撞的概率越高</p>
+<h3 id="3-4-2-在数据链路层扩展以太网"><a href="#3-4-2-在数据链路层扩展以太网" class="headerlink" title="3.4.2 在数据链路层扩展以太网"></a>3.4.2 在<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82&spm=1001.2101.3001.7020">数据链路层</a>扩展以太网</h3><ul>
+<li>扩展以太网更常用的方法是在数据链路层进行</li>
+<li>早期使用网桥，现在使用以太网交换机</li>
+</ul>
+<p><img src="https://s2.loli.net/2024/03/14/ALQvRzlxaN9SEr2.png" srcset="/img/loading.gif" lazyload></p>
+<p>现在使用的方法是以太网交换机，以太网交换机通常都有十几个接口。因此，以太网交换机实质上就是一个多接口的网桥，可见交换机工作在数据链路层。以太网交换机的每个接口都直接与主机相连，并且一般都工作在<strong>①全双工方式，交换机能同时连通许多对的接口，使每一对相互通信的主机都能像独占通信媒体那样，进行无碰撞地传输数据</strong>，以太网交换机由于使用了专用的交换结构芯片，通过硬件来转发就比靠软件转发的网桥速度快得多，所以交换机的出现很快的就淘汰掉了网桥。</p>
+<p>以太网交换机是一种即插即用的设备其内部的帧交换表（又称为地址表）通过自学习的算法自动逐渐建立的实际上这种交换表就是一个<strong>②内容可寻址存储器</strong>。</p>
+<p><font color=Yellow>物理层因为总线共享而造成的冲突在数据链路层因为交换机的①②两个特性得以解决</font></p>
+<p>建立转发表是通过不断的发送广播来实现的，但是若有的网络为环形网络，此时这个数据帧会一直在网络在“转圈圈”，在透明网桥中，为了避免这个问题，引入了生成树算法，无环路的树状结构。</p>
+<p><img src="https://s2.loli.net/2024/03/14/zTs4ylKGwm3qJ9i.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3-4-3-虚拟机局域网"><a href="#3-4-3-虚拟机局域网" class="headerlink" title="3.4.3 虚拟机局域网"></a>3.4.3 虚拟机局域网</h3><p>虚拟局域网（<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Virtual&spm=1001.2101.3001.7020">Virtual</a> Local Area Network，VLAN）是一组逻辑上的设备和用户，通过端口分配、MAC地址分配等方式将同一局域网内的主机划分为不同的区域（VLAN），不同区域之间的主机无法直接通信（即使它们都在同一个有线局域网中），而同一区域内的主机之间可以正常通信，这就好像一个局域网一样，因此叫做虚拟局域网。与传统的局域网技术相比较，VLAN技术更加灵活，它具有以下优点： 网络设备的移动、添加和修改的管理开销减少；可以控制广播活动；可提高网络的安全性。</p>
+<p>  在计算机网络中，一个二层网络可以被划分为多个不同的广播域，一个广播域对应了一个特定的用户组，默认情况下这些不同的广播域是相互隔离的。不同的广播域之间想要通信，需要通过一个或多个路由器。这样的一个广播域就称为VLAN。</p>
+<p>划分标准</p>
+<p>  工作站到VLAN的映射有几种方法。通过端口、基于MAC地址是常见的划分标准。</p>
+<h5 id="VLAN标签"><a href="#VLAN标签" class="headerlink" title="VLAN标签"></a>VLAN标签</h5><p>  当不同的VLAN中的站连接在同一交换机时，交换机确保流量不在两个VLAN之间泄漏，无论这些站使用哪种类型的以太网接口。当多个VLAN跨越多个交换机（中继）时，在以太网帧发送到另一台交换机之前，需要使用VLAN来标记该帧的归属。</p>
+<p><img src="https://s2.loli.net/2024/03/14/naFl6PoVZNtE9wQ.png" srcset="/img/loading.gif" lazyload></p>
+<p>数据链路层一旦划分了vlan标签之后就无法让A3、B4之间相互通信了。（数据链路层就无法解决了）</p>
 
                 
               </div>
