@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3gbizhiCom-1709181669.jpg">
 <meta property="article:published_time" content="2024-03-10T01:18:30.000Z">
-<meta property="article:modified_time" content="2024-03-29T08:10:16.882Z">
+<meta property="article:modified_time" content="2024-03-29T08:25:51.681Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary_large_image">
@@ -315,6 +315,7 @@
 <p>上面的这种方法太过于难以像到了，尤其是 <code>C ^= 3</code> 这一句。使用下面进行模拟就比较容易理解</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">magicalString</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(<span class="hljs-string">&quot;122&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">sx</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1&quot;</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; n; i++)&#123;<br>            <span class="hljs-keyword">if</span>(s.charAt(i) == <span class="hljs-string">&#x27;1&#x27;</span>) s.append(sx.repeat(<span class="hljs-number">1</span>));<br>            <span class="hljs-keyword">else</span> s.append(sx.repeat(<span class="hljs-number">2</span>));<br>            sx = <span class="hljs-string">&quot;1&quot;</span>.equals(sx) ?<span class="hljs-string">&quot;2&quot;</span> : <span class="hljs-string">&quot;1&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) ans += <span class="hljs-string">&#x27;2&#x27;</span> - s.charAt(i);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>上面的这种方法对于方法的使用和利用很好</p>
 
                 
               </div>
