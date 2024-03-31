@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="kyclnx">
 <meta property="og:description" content="56. 合并区间 - 力扣（LeetCode） List.toArray()方法，将集合转化为数组 Arrays.sort(intervals, (a, b) -&gt; a[0] - b[0]);将二维数组按照第一列的大小进行排序 方法一：将二维数组按照第一列的大小进行排序 1234567891011121314151617class Solution &amp;#123;    public int[">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3395df776b343d2674599548c75646f2.png">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3gbizhiCom-1706572574.jpg">
 <meta property="article:published_time" content="2024-03-31T00:24:52.557Z">
-<meta property="article:modified_time" content="2024-03-31T00:24:43.274Z">
+<meta property="article:modified_time" content="2024-03-31T01:02:36.120Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3395df776b343d2674599548c75646f2.png">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3gbizhiCom-1706572574.jpg">
   
   
   
@@ -193,7 +193,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3395df776b343d2674599548c75646f2.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3gbizhiCom-1706572574.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          509 字
+          1.1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          5 分钟
+          10 分钟
         
       </span>
     
@@ -290,6 +290,29 @@
 
 <p>方法二：将二维数组按照第二列的大小进行排序</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countWays</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] ranges)</span> &#123;<br>        Arrays.sort(ranges,(a, b) -&gt; a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        <span class="hljs-comment">//使用第二位数字进行排序时候，就要逆序遍历了</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">minL</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE, ans = <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> ranges.length;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">L</span> <span class="hljs-operator">=</span> ranges[i][<span class="hljs-number">0</span>], R = ranges[i][<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span>(minL &gt; R)&#123;<br>                ans = ans*<span class="hljs-number">2</span>;<br>                ans %= <span class="hljs-number">1000000007</span>;<br>            &#125;<br>            minL = Math.min(minL, L);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-coins-to-be-added/?envType=daily-question&envId=2024-03-30">2952. 需要添加的硬币的最小数量 - 力扣（LeetCode）</a></p>
+<p>此题目对于思维能力感觉要求就是很高的那种，虽然它的代码及其简短（甚至都可以背得下来），但是代码是背不完的（除了排序），还是要对于代码具有一定的理解</p>
+<ul>
+<li><p>对于一个整数<code>x</code>，如果区间<code>[1, x - 1]</code>内的所有金额都可以取的到，而且<code>x</code>还在数组之中，则区间<code>[1, 2x - 1]</code>内的所有金额也都可以取的到。</p>
+</li>
+<li><p>假设金额<code>x</code>不可取的，则至少要在数组中添加一个小于或者等于<code>x</code>的数组才能取得<code>x</code>，否则，无法取得<code>x</code>。</p>
+</li>
+<li><p>如果区间<code>[1, x - 1]</code>内的所有金额都可以取的到，则从贪心的角度来看，添加<code>x</code>之后则可以取得<code>x</code>，且满足添加的金额个数最少。在添加了<code>x</code>之后，区间 <code>[1, 2x - 1]</code>的所有金额都可以取的到，下一个不可取得的金额一定不会小于<code>2x</code>。</p>
+</li>
+<li><p>由此可以得到一个贪心的方案。每次找到不可取得的最小金额<code>x</code>，在数组之中添加<code>x</code>，之后，然后寻找下一个不可取得的最小整数，重复上述步骤，直到区间<code>[1, target]</code>中的所有金额都可以取得。</p>
+<p>具体实现方面，任何时候都应满足区间 <code>[1,x−1]</code> 内的所有金额都可取得。令 <code>x</code> 的初始值为 1，数组下标 <code>index</code> 的初始值为 0，则初始状态下区间 <code>[1,x−1] </code>为空区间，满足区间内的所有金额都可取得。进行如下操作。</p>
+<ul>
+<li>如果<code> index</code> 在数组 <code>coins</code> 的下标范围内且 <code>coins[index]≤x</code>，则将 <code>coins[index]</code> 的值加给 x，并将 <code>index</code>的值加 1。可取得的区间从<code>[1,x−1] </code>扩展到 <code>[1,x+coins[index]−1]</code>，对 x 的值更新以后，可取得区间为 <code>[1,x−1]</code>。</li>
+<li>否则，<code>x</code>没有可取得，因此需要在数组中添加<code>x</code>，然后将 x 的值乘以2。</li>
+<li>在数组中添加 <code>x</code>之后，可取得的区间从<code>[1,x−1]</code>扩展到<code>[1,2x−1]</code>，对 x的值更新以后，可取得区间为<code>[1,x−1]</code>。</li>
+<li>重复上述操作，直到<code>x</code>的值大于 <code>target</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumAddedCoins</span><span class="hljs-params">(<span class="hljs-type">int</span>[] coins, <span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> coins.length,x = <span class="hljs-number">1</span>,index = <span class="hljs-number">0</span>,ans = <span class="hljs-number">0</span>;<br>        Arrays.sort(coins);<br>        <span class="hljs-keyword">while</span>(x &lt;= target)&#123;<br>            <span class="hljs-keyword">if</span>(index &lt; n &amp;&amp; coins[index] &lt;= x)&#123;<br>                x += coins[index];<br>                index++;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                x *= <span class="hljs-number">2</span>;<br>                ans++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
