@@ -16,24 +16,24 @@
   <meta name="author" content="niajx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LC 128场双周赛100280. 覆盖所有点的最少矩形数目 - 力扣（LeetCode）给你一个二维整数数组 point ，其中 points[i] &#x3D; [xi, yi] 表示二维平面内的一个点。同时给你一个整数 w 。你需要用矩形 覆盖所有 点。 每个矩形的左下角在某个点 (x1, 0) 处，且右上角在某个点 (x2, y2) 处，其中 x1 &lt;&#x3D; x2 且 y2 &gt;&#x3D; 0 ，同时">
+    <meta name="description" content="数字的位操作7. 整数反转 - 力扣（LeetCode） 12345678910111213class Solution &amp;#123;    public int reverse(int x) &amp;#123;        int res &#x3D; 0;        while(x !&#x3D; 0)&amp;#123;            int v &#x3D; x % 10;            if(res &gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 128场双周赛">
-<meta property="og:url" content="http://example.com/2024/04/14/128_Double/index.html">
+<meta property="og:title" content="数与位">
+<meta property="og:url" content="http://example.com/2024/04/18/%E6%95%B0%E4%B8%8E%E4%BD%8D1/index.html">
 <meta property="og:site_name" content="kyclnx">
-<meta property="og:description" content="LC 128场双周赛100280. 覆盖所有点的最少矩形数目 - 力扣（LeetCode）给你一个二维整数数组 point ，其中 points[i] &#x3D; [xi, yi] 表示二维平面内的一个点。同时给你一个整数 w 。你需要用矩形 覆盖所有 点。 每个矩形的左下角在某个点 (x1, 0) 处，且右上角在某个点 (x2, y2) 处，其中 x1 &lt;&#x3D; x2 且 y2 &gt;&#x3D; 0 ，同时">
+<meta property="og:description" content="数字的位操作7. 整数反转 - 力扣（LeetCode） 12345678910111213class Solution &amp;#123;    public int reverse(int x) &amp;#123;        int res &#x3D; 0;        while(x !&#x3D; 0)&amp;#123;            int v &#x3D; x % 10;            if(res &gt;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%E4%B8%8B%E8%BD%BD%20(1).png">
-<meta property="article:published_time" content="2024-04-14T01:39:30.000Z">
-<meta property="article:modified_time" content="2024-04-14T01:57:28.838Z">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%E4%B8%8B%E8%BD%BD.png">
+<meta property="article:published_time" content="2024-04-18T09:32:30.000Z">
+<meta property="article:modified_time" content="2024-04-18T09:32:58.035Z">
 <meta property="article:author" content="niajx">
-<meta property="article:tag" content="周赛">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%E4%B8%8B%E8%BD%BD%20(1).png">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%E4%B8%8B%E8%BD%BD.png">
   
   
   
-  <title>LC 128场双周赛 - kyclnx</title>
+  <title>数与位 - kyclnx</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,13 +193,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%E4%B8%8B%E8%BD%BD%20(1).png') no-repeat center center; background-size: cover;">
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%E4%B8%8B%E8%BD%BD.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LC 128场双周赛"></span>
+            <span id="subtitle" data-typed-text="数与位"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-14 09:39" pubdate>
-          2024年4月14日 上午
+        <time datetime="2024-04-18 17:32" pubdate>
+          2024年4月18日 下午
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          272 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          10 分钟
+          3 分钟
         
       </span>
     
@@ -270,72 +270,20 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LC 128场双周赛</h1>
+            <h1 id="seo-header">数与位</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="LC-128场双周赛"><a href="#LC-128场双周赛" class="headerlink" title="LC 128场双周赛"></a>LC 128场双周赛</h1><h3 id="100280-覆盖所有点的最少矩形数目-力扣（LeetCode）"><a href="#100280-覆盖所有点的最少矩形数目-力扣（LeetCode）" class="headerlink" title="100280. 覆盖所有点的最少矩形数目 - 力扣（LeetCode）"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-rectangles-to-cover-points/description/">100280. 覆盖所有点的最少矩形数目 - 力扣（LeetCode）</a></h3><p>给你一个二维整数数组 <code>point</code> ，其中 <code>points[i] = [xi, yi]</code> 表示二维平面内的一个点。同时给你一个整数 <code>w</code> 。你需要用矩形 <strong>覆盖所有</strong> 点。</p>
-<p>每个矩形的左下角在某个点 <code>(x1, 0)</code> 处，且右上角在某个点 <code>(x2, y2)</code> 处，其中 <code>x1 &lt;= x2</code> 且 <code>y2 &gt;= 0</code> ，同时对于每个矩形都 <strong>必须</strong> 满足 <code>x2 - x1 &lt;= w</code> 。</p>
-<p>如果一个点在矩形内或者在边上，我们说这个点被矩形覆盖了。</p>
-<p>请你在确保每个点都 <strong>至少</strong> 被一个矩形覆盖的前提下，<strong>最少</strong> 需要多少个矩形。</p>
-<p><strong>注意：</strong>一个点可以被多个矩形覆盖。</p>
-<p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240413225051.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240413225135.png" srcset="/img/loading.gif" lazyload alt="50、、" style="zoom:50%;" /><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240413225544.png" srcset="/img/loading.gif" lazyload alt="50%" style="zoom:50%;" /></p>
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= points.length &lt;= 105</code></li>
-<li><code>points[i].length == 2</code></li>
-<li><code>0 &lt;= xi == points[i][0] &lt;= 109</code></li>
-<li><code>0 &lt;= yi == points[i][1] &lt;= 109</code></li>
-<li><code>0 &lt;= w &lt;= 109</code></li>
-<li>所有点坐标 <code>(xi, yi)</code> 互不相同。</li>
-</ul>
-<p>可以这样进行理解最后答案的数目与高度是没有啥关系的（可以将它想象成一条线上的点），所以按照第一列的大小顺序进行排序，当每一次的宽度够不到下一个点的左区间的时候+w，同时ans + 1，如此反复贪心下去（但就是想不到）</p>
-<p>如果这么写的话有一些像我之前写过的区间合并了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minRectanglesToCoverPoints</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] points, <span class="hljs-type">int</span> w)</span> &#123;<br>        <span class="hljs-comment">//按照第一列的大小顺序进行排序</span><br>		Arrays.sort(points, (a, b) -&gt;(a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]));<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, mx = -<span class="hljs-number">1</span>, n = points.length;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++)&#123;<br>            <span class="hljs-keyword">if</span>(points[i][<span class="hljs-number">0</span>] &gt; mx)&#123;<br>                ans += <span class="hljs-number">1</span>;<br>                mx = points[i][<span class="hljs-number">0</span>] + w;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="数字的位操作"><a href="#数字的位操作" class="headerlink" title="数字的位操作"></a>数字的位操作</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-integer/">7. 整数反转 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">reverse</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(x != <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">v</span> <span class="hljs-operator">=</span> x % <span class="hljs-number">10</span>;<br>            <span class="hljs-keyword">if</span>(res &gt; <span class="hljs-number">214748364</span> || (res == <span class="hljs-number">214748364</span> &amp;&amp; v &gt; <span class="hljs-number">7</span>)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(res &lt; -<span class="hljs-number">214748364</span> || (res == -<span class="hljs-number">214748364</span>) &amp;&amp; v &lt; -<span class="hljs-number">7</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            x /= <span class="hljs-number">10</span>;<br>            res = res*<span class="hljs-number">10</span> + v;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="100273-边界元素是最大值的子数组数目-力扣（LeetCode）"><a href="#100273-边界元素是最大值的子数组数目-力扣（LeetCode）" class="headerlink" title="100273. 边界元素是最大值的子数组数目 - 力扣（LeetCode）"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-number-of-subarrays-where-boundary-elements-are-maximum/description/">100273. 边界元素是最大值的子数组数目 - 力扣（LeetCode）</a></h3><p>给你一个 <strong>正</strong> 整数数组 <code>nums</code> 。请你求出 <code>nums</code> 中有多少个子数组，满足子数组中 <strong>第一个</strong> 和 <strong>最后一个</strong> 元素都是这个子数组中的 <strong>最大</strong> 值。</p>
-<p><strong>示例 1：</strong>                                                                                                                  </p>
-<p><strong>输入：</strong>nums &#x3D; [1,4,3,3,2]</p>
-<p><strong>输出：</strong>6</p>
-<p><strong>解释：</strong></p>
-<p>总共有 6 个子数组满足第一个元素和最后一个元素都是子数组中的最大值：</p>
-<ul>
-<li>子数组 [<em><strong>1</strong></em>,4,3,3,2]，最大元素为 1 ，第一个和最后一个元素都是 1 。</li>
-<li>子数组 [1,<em><strong>4</strong></em>,3,3,2] ，最大元素为 4 ，第一个和最后一个元素都是 4 。</li>
-<li>子数组 [1,4,<em><strong>3</strong></em>,3,2] ，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-<li>子数组 [1,4,3,<em><strong>3</strong></em>,2]，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-<li>子数组 [1,4,3,3,<em><strong>2</strong></em>] ，最大元素为 2 ，第一个和最后一个元素都是 2 。</li>
-<li>子数组 [1,4,<em><strong>3,3</strong></em>,2] ，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-</ul>
-<p>所以我们返回 6 。</p>
-<p><strong>示例 2：</strong></p>
-<p><strong>输入：</strong>nums &#x3D; [3,3,3]</p>
-<p><strong>输出：</strong>6</p>
-<p><strong>解释：</strong></p>
-<p>总共有 6 个子数组满足第一个元素和最后一个元素都是子数组中的最大值：</p>
-<ul>
-<li>子数组 [<em><strong>3</strong></em>,3,3]，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-<li>子数组 [3,<em><strong>3</strong></em>,3] ，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-<li>子数组 [3,3,<em><strong>3</strong></em>]，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-<li>子数组 [<em><strong>3,3</strong></em>,3] ，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-<li>子数组 [3,<em><strong>3,3</strong></em>] ，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-<li>子数组 [<em><strong>3,3,3</strong></em>] ，最大元素为 3 ，第一个和最后一个元素都是 3 。</li>
-</ul>
-<p>所以我们返回 6 。</p>
-<p><strong>示例 3：</strong></p>
-<p><strong>输入：</strong>nums &#x3D; [1]</p>
-<p><strong>输出：</strong>1</p>
-<p><strong>解释：</strong></p>
-<p><code>nums</code> 中只有一个子数组 [<em><strong>1</strong></em>] ，最大元素为 1 ，第一个和最后一个元素都是 1 。</p>
-<p>所以我们返回 1 。</p>
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 105</code></li>
-<li><code>1 &lt;= nums[i] &lt;= 109</code></li>
-</ul>
-<p>当遍历数组<code>nums</code>时，我们使用双端队列<code>st</code>来存储当前遍历到的元素的最大值及其出现次数。这样，在遍历过程中，我们可以快速地找到当前子数组的最大值，并更新答案<code>ans</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">numberOfSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>		<span class="hljs-type">long</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> nums.length;<br>		Deque&lt;<span class="hljs-type">int</span>[]&gt; st = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>		st.push(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;Integer.MAX_VALUE, <span class="hljs-number">0</span>&#125;);<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> x : nums)&#123;<br>			<span class="hljs-keyword">while</span>(x &gt; st.peek()[<span class="hljs-number">0</span>]) st.pop();<br>			<span class="hljs-keyword">if</span>(x == st.peek()[<span class="hljs-number">0</span>])&#123;<br>				ans += st.peek()[<span class="hljs-number">1</span>]++;<br>			&#125;<span class="hljs-keyword">else</span>&#123;<br>				st.push(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;x, <span class="hljs-number">1</span>&#125;);<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-number/">9. 回文数 - 力扣（LeetCode）</a></p>
+<p>这种方法就是练一下kmp算法，主要是这东西我写一次，错一次</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>		<span class="hljs-keyword">if</span>(x &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> String.valueOf(x);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">ss</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot; &quot;</span> + s;<br>        <span class="hljs-type">int</span>[] next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i++)&#123;<br>            <span class="hljs-keyword">while</span>(j &gt; <span class="hljs-number">0</span> &amp;&amp; ss.charAt(j + <span class="hljs-number">1</span>) != ss.charAt(i)) j = next[j];<br>            <span class="hljs-keyword">if</span>(ss.charAt(j + <span class="hljs-number">1</span>) == ss.charAt(i)) next[i] = ++j;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n; i &gt; <span class="hljs-number">0</span>; i--)&#123;<br>            <span class="hljs-keyword">while</span>(len &gt; <span class="hljs-number">0</span> &amp;&amp; ss.charAt(len + <span class="hljs-number">1</span>) != ss.charAt(i)) len = next[len];<br>            <span class="hljs-keyword">if</span>(ss.charAt(len + <span class="hljs-number">1</span>) == ss.charAt(i)) len++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> len == n;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/largest-palindrome-product/description/">479. 最大回文数乘积 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestPalindrome</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">10</span>, n) - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> max; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> i, t = i;<br>            <span class="hljs-keyword">while</span>(t != <span class="hljs-number">0</span>)&#123;<br>                num = num *<span class="hljs-number">10</span> + (t % <span class="hljs-number">10</span>);<br>                t /= <span class="hljs-number">10</span>;<br>            &#125;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">long</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> max; j*j &gt;= num; j--)&#123;<br>                <span class="hljs-keyword">if</span>(num % j == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)(num % <span class="hljs-number">1337</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
                 
@@ -370,7 +318,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%91%A8%E8%B5%9B/" class="print-no-link">#周赛</a>
+        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
     </div>
   
@@ -382,8 +330,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LC 128场双周赛</div>
-      <div>http://example.com/2024/04/14/128_Double/</div>
+      <div>数与位</div>
+      <div>http://example.com/2024/04/18/数与位1/</div>
     </div>
     <div class="license-meta">
       
@@ -395,7 +343,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月14日</div>
+          <div>2024年4月18日</div>
         </div>
       
       
@@ -427,18 +375,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/18/%E6%95%B0%E4%B8%8E%E4%BD%8D1/" title="数与位">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数与位</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/10/JUC-03-1/" title="java多线程1">
-                        <span class="hidden-mobile">java多线程1</span>
+                      <a href="/2024/04/14/128_Double/" title="LC 128场双周赛">
+                        <span class="hidden-mobile">LC 128场双周赛</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
