@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/yeprusvetkx.jpg">
 <meta property="article:published_time" content="2024-04-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-24T14:58:41.170Z">
+<meta property="article:modified_time" content="2024-04-25T04:32:15.932Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="面试必背">
 <meta name="twitter:card" content="summary_large_image">
@@ -283,13 +283,13 @@
 <p>&lt;1&gt;提高了系统的资源利用率但是失去了程序的封闭性，</p>
 <p>&lt;2&gt;程序和机器的执行顺序活动不再是一一对应</p>
 <h4 id="进程概念的引入"><a href="#进程概念的引入" class="headerlink" title="进程概念的引入"></a>进程概念的引入</h4><p>程序的并发执行代替了程序的顺序执行它破坏了程序的封闭性和可再现性，使得程序和计算不再一一对应</p>
-<p>进程的定义：进程是程序的一次执行，该程序可以和其他的程序并发执行（进程是系统进行资源分配和调度的一个独立单位，是系统中的并发执行的单位。）</p>
+<p>进程的定义：<font color = red>进程是程序的一次执行，该程序可以和其他的程序并发执行（进程是系统进行资源分配和调度的一个独立单位，是系统中的并发执行的单位。）</font></p>
 <h3 id="3-1-2-进程的组成"><a href="#3-1-2-进程的组成" class="headerlink" title="3.1.2 进程的组成"></a>3.1.2 进程的组成</h3><p>程序、数据集合、进程控制块（PCB）                                                                                      </p>
 <h4 id="进程调度的状态"><a href="#进程调度的状态" class="headerlink" title="进程调度的状态"></a>进程调度的状态</h4><p><strong>运行状态：</strong>进程已经获得必要的资源，并且占有一个处理机，处理机正在执行该进程的程序。</p>
 <p><strong>就绪状态：</strong>如果进程已经具备了运行的条件，但是由于处理机已经被其他的进程占用，因此暂时不能运行，而是等待分配处理机。</p>
 <p><strong>阻塞状态：</strong>进程在运行的过程中，因为等待某一个事件（如等待某一个输入输出操作的完成而不能运行的状态，称之为阻塞状态，即进程的运行受到了阻塞）</p>
 <p>正在处理机上运行的程序称为该处理机的现运行进程。在任何的时候，一个系统的现运行的进程数一定少于等于可用的处理机的数目。</p>
-<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240424211131.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+<img src = "https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240425122942.png" style="zoom:50%;" >
 
 
 
