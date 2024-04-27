@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/save_picture/OIP.jpg">
+  <link rel="icon" href="/img/save_picture/OIP.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="niajx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="讲一下上章节的一些心得吧： 在数据链路层有两种信道因而产生了对应信道的两种协议（PPP协议和CSMA&#x2F;CD协议），PPP协议用来通过拨号或者专线方式建立点对点连接发送数据。CSMA&#x2F;CD协议的基本原理是：每一个节点都共享网络传输信道，在每一个站点发送数据之前，都会检测信道是否空闲，如果空闲则发送，否则就等待；在信息发送之后，则对于冲突进行检测，当发现冲突的时候，就取消发送。最后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络层1~2.2.2">
+<meta property="og:url" content="http://example.com/2024/03/18/cn_%E7%BD%91%E7%BB%9C%E5%B1%8201%EF%BC%8C02.2.2/index.html">
+<meta property="og:site_name" content="kyclnx">
+<meta property="og:description" content="讲一下上章节的一些心得吧： 在数据链路层有两种信道因而产生了对应信道的两种协议（PPP协议和CSMA&#x2F;CD协议），PPP协议用来通过拨号或者专线方式建立点对点连接发送数据。CSMA&#x2F;CD协议的基本原理是：每一个节点都共享网络传输信道，在每一个站点发送数据之前，都会检测信道是否空闲，如果空闲则发送，否则就等待；在信息发送之后，则对于冲突进行检测，当发现冲突的时候，就取消发送。最后">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/qwluzb5iloh.jpg">
+<meta property="article:published_time" content="2024-03-18T00:55:55.000Z">
+<meta property="article:modified_time" content="2024-04-27T09:49:54.742Z">
+<meta property="article:author" content="niajx">
+<meta property="article:tag" content="计算机网络基础">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/qwluzb5iloh.jpg">
+  
+  
+  
+  <title>网络层1~2.2.2 - kyclnx</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":130,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>kyclnx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/qwluzb5iloh.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="网络层1~2.2.2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-18 08:55" pubdate>
+          2024年3月18日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">网络层1~2.2.2</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>讲一下上章节的一些心得吧：</p>
+<p>在数据链路层有两种信道因而产生了对应信道的两种协议（PPP协议和CSMA&#x2F;CD协议），PPP协议用来通过拨号或者专线方式建立点对点连接发送数据。CSMA&#x2F;CD协议的基本原理是：每一个节点都共享网络传输信道，在每一个站点发送数据之前，都会检测信道是否空闲，如果空闲则发送，否则就等待；在信息发送之后，则对于冲突进行检测，当发现冲突的时候，就取消发送。最后交换机的出现解决了物理层因为总线共享而造成的冲突问题。虚拟局域网为了安全方面的考虑，将一个较大的局域网分割成为了一些较小的局域网，但是数据链路层一旦划分了VLAN标签之后，让接口带上不同的Vlan标签，无法使得A3、B4(不同标签的两个接口)相互通信了（起码你是在数据链路层解决不了了）。</p>
+<p>本章节最重要的内容是：</p>
+<p>（1)虚拟互连网络和两种服务、两个层面的概念。</p>
+<p>（2）IP地址和MAC地址的关系。</p>
+<p>（3）传统分类的IP地址和无分类间路由选择CIDR（后者是重点）。</p>
+<p>（4）路由选择协议的工作原理。</p>
+<h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><h2 id="4-1-网络层的几个重要概念"><a href="#4-1-网络层的几个重要概念" class="headerlink" title="4.1 网络层的几个重要概念"></a>4.1 网络层的几个重要概念</h2><h3 id="4-1-1-网络层提供的两种服务"><a href="#4-1-1-网络层提供的两种服务" class="headerlink" title="4.1.1 网络层提供的两种服务"></a>4.1.1 网络层提供的两种服务</h3><p>在计算机网络领域，网络层应该向着运输层提供怎样的服务（“面向连接”还是“无连接”）曾经引起长期的争论。争论焦点实质就是：在计算机通信中，可靠交付应该由谁来负责？是网络还是端系统？</p>
+<p>1、虚电路服务</p>
+<ul>
+<li><p>电信网使用昂贵的程控交换机，用面向连接的通信方式，使电信网络能够向用户(实际上就是电话机)提供可靠传输的服务。当两个计算机进行通信的步骤：   </p>
+<blockquote>
+<p>(1)应当先建立连接(但在分组交换中是建立一条虚电路VC)，以保证通信双方所需的一切网络资源。<br>(2)然后双方就沿着已建立的虚电路发送分组。<br>(3)这样的分组的首部就不需要填写完整的目的主机地址，而只需填写这条虚电路的编号(一个不大的整数)，因而减少了分组的开销。<br>(4)如果这种通信方式再使用可靠传输的网络协议，就可使所发送的分组<strong>无差错按序地到达终点，当然也不丢失、不重复。</strong><br>(5)在通信结束后，要释放建立的虚电路。</p>
+</blockquote>
+</li>
+</ul>
+<p>2、数据报服务</p>
+<ul>
+<li><p>因特网在设计上就采用了和电信网完全不同的思路。<br>由于传输网络不提供端到端的可靠传输服务，这就使网络中的路由器可以做得比较简单，而且价格低廉(与电信网的交换机相比较)。</p>
+<blockquote>
+<p>(1)网络层向上只提供<strong>简单灵活的、无连接的、尽最大努力交付</strong>的数据报服务。网络在发送分组时不需要先建立连接。每个分组(也就是IP数据报)独立发送，与其前后的分组无关(不进行编号)。<br>(2)<strong>网络层不提供服务质量的承诺。</strong>也就是说所传送的分组，可能出错、丢失、重复或失序，当然也不保证分组交付的时限。<br>这种设计思路的好处：<br>(1)网络的造价大大降低。<br>(2)运行方式灵活。<br>(3)能够适应多种应用。</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%7BFA11DD46-067F-4214-AE28-E196ED6220BB%7D.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />       <img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%7B803B31EA-00EA-40ea-8B91-8D4DB6E47F46%7D.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240427171346.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+
+<h3 id="4-1-2-网络层的两个层面"><a href="#4-1-2-网络层的两个层面" class="headerlink" title="4.1.2 网络层的两个层面"></a>4.1.2 网络层的两个层面</h3><p>不同网络的两个主机相互通信，要经过若干个路由器转发分组得来，分组查找路由器的转发表，指明从接口转发到下一个路由器，按照共同选择的路由协议，通过多次交换路由信息而产生的。由此可见在路由器之间传送的信息有以下两大类：</p>
+<p>第一类<strong>转发源主机和目的主机之间所传送的数据</strong>，把源主机所发送的分组，像接力赛跑那样从一个路由器转发到下一个路由器，最后将分组转发到目的主机。</p>
+<p>第二类则是传送路由信息，根据路由协议所选择的路由算法，彼此不断地交换路由信息分组，目的是为了在路由器中创建路由表，由此导出为转发分组而用的转发表。这一类信息的传送是为了第一类数据传送而服务的。</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240319112542.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+
+<p>​                                  使用图4-2的方法进行描述就是将网络抽象的划分为数据层面（或者<strong>转发层面</strong>）和<strong>控制层面</strong>。</p>
+<p>在<strong>数据层面</strong>，每一个路由器根据本路由器生成的转发表，将查到的分组，从查找的对应的接口转发出去。为了提高转发效率，现在的路由器一般都通过硬件进行转发。</p>
+<p>但是在<strong>控制层面</strong>则不同，路由器必须和相邻的路由器 交换信息，然后才能创建出本路由器的路由表。根据路由协议所使用的路由算法计算路由要使用软件 ，这就慢多了根据以上不难看出<strong>数据层面</strong>的问题比较单纯，因为路由器在转发分组的时候，是独立的根据本路由器的转发表转发分组的，但是在<strong>控制层面</strong>就比较复杂了因为路由器要创建路由表，就必须依靠许多路由器协同合作。</p>
+<p>控制层面是各种协议工作的层面，他的<strong>作用是通过控制和管理各协议的运行使得路由器或交换机能够对整个网络的设备、链路和运行的协议有一个准确的了解，并在网络发生变化时也能及时感知并调整</strong>。</p>
+<h2 id="4-2-网际协议IP"><a href="#4-2-网际协议IP" class="headerlink" title="4.2 网际协议IP"></a>4.2 网际协议IP</h2><p>网际协议 IP 是 TCP&#x2F;IP 体系中两个最主要的协议之一，也是最重要的互联网标准协议之一。</p>
+<p>与 IP 协议配套使用的还有三个协议：</p>
+<ul>
+<li>地址解析协议 ARP (Address Resolution Protocol)</li>
+<li>网际控制报文协议 ICMP (Internet Control Message Protocol)</li>
+<li>网际组管理协议 IGMP (Internet Group Management Protocol)</li>
+</ul>
+<p>下图画出了这三个协议和网际协议 IP 的关系。在这一层中， ARP 画在最下面，因为 IP 经常要使用这个协议。 ICMP 和 IGMP 画在这一层的上部，因为它们要使用 IP 协议。这三个协议将在后面陆续介绍。由于网际协议 IP 是用来使互连起来的许多计算机网络能够进行通信的，因此 TCP&#x2F;IP体系中的网络层常常被称为网际层(internet layer)，或 IP 层。使用“网际层”这个名词的好处是强调。</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240319143438.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h3 id="4-2-1-虚拟互联网络"><a href="#4-2-1-虚拟互联网络" class="headerlink" title="4.2.1 虚拟互联网络"></a>4.2.1 虚拟互联网络</h3><p>我们知道，如果要在全世界范围内把数以百万计的网络都互连起来，并且能够互相通信，那么这样的任务一定非常复杂。其中会遇到许多需要解决的问题，如：</p>
+<ul>
+<li>不同的寻址方案；</li>
+<li>不同的最大分组长度；</li>
+<li>不同的网络接入机制；</li>
+<li>不同的超时控制；</li>
+<li>不同的差错恢复方法；</li>
+<li>不同的状态报告方法；</li>
+<li>不同的路由选择技术；</li>
+<li>不同的用户接入控制；</li>
+<li>不同的服务（面向连接服务和无连接服务）；</li>
+</ul>
+<p>能不能让大家都使用相同的网络，这样可使网络互连变得比较简单。答案是不行的。因为用户的需求是多种多样的，**没有一种单一的网络能够适应所有用户的需求 **。另外，网络技术是不断发展的，网络的制造厂家也要经常推出新的网络，在竞争中求生存。因此在市场上总是有很多种不同性能、不同网络协议的网络，供不同的用户选用。</p>
+<p>从一般的概念来讲，将网络互相连接起来要使用一些中间设备。根据中间设备所在的层次，可以有以下四种不同的中间设备：</p>
+<p>（1）物理层使用的中间设备叫做<strong>转发器</strong>(repeater)。</p>
+<p>（2）数据链路层使用的中间设备叫做网桥或<strong>桥接器</strong>(bridge)<strong>交换机</strong>。</p>
+<p>（3）网络层使用的中间设备叫做<strong>路由器</strong>(router)。</p>
+<p>（4）在网络层以上使用的中间设备叫做<strong>网关</strong>(gateway)。用网关连接两个不兼容的系统需要在高层进行协议的转换。</p>
+<p>所谓虚拟互连网络也就是逻辑互连网络，它的意思就是互连起来的各种物理网络的异构性本来是客观存在的，但是我们利用 IP 协议就可以使这些性能各异的网络<strong>在网络层上看起来好像是一个统一的网络</strong>。这种使用 IP 协议的虚拟互连网络可简称为 IP 网（IP 网是虚拟的，但平常不必每次都强调“虚拟”二字）。</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240319143717.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>其实上述图片强调的是<strong>互联网可以由多种异构网络构成</strong>。</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240427173054.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
+
+<p>如果我们只从网络层考虑问题，那么 IP 数据报就可以想象是在网络层中传送， 其传送路径是：</p>
+<p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240427172932.png" srcset="/img/loading.gif" lazyload></p>
+<p>这样就不必画出许多完整的协议栈，使问题的描述更加简单。</p>
+<p>有了虚拟互连网络的概念后，我们再讨论在这样的虚拟网络上如何寻址。</p>
+<p><strong>沿着协议栈向下封装，向上解封</strong>的一个过程，通信向上层提供服务</p>
+<h3 id="4-2-2-IP地址"><a href="#4-2-2-IP地址" class="headerlink" title="4.2.2 IP地址"></a>4.2.2 IP地址</h3><p>整个的互联网就是一个<strong>单一的、抽象</strong>的网络。 IP 地址就是给互联网上的每一台主机（或路由器）的每一个接口分配一个在全世界范围内是唯一的 32 位的标识符。 IP 地址的结构使我们可以在互联网上很方便地进行寻址。 IP 地址现在由互联网名字和数字分配机构ICANN (Internet Corporation for Assigned Names and Numbers)进行分配 。</p>
+<h4 id="1、IP地址及其表示方法"><a href="#1、IP地址及其表示方法" class="headerlink" title="1、IP地址及其表示方法"></a>1、IP地址及其表示方法</h4><p>IP 地址的编址方法共经过了三个历史阶段。</p>
+<p>（1）<strong>分类的 IP 地址</strong>。这是最基本的编址方法，在 1981 年就通过了相应的标准协议。</p>
+<p>（2）<strong>子网的划分</strong>。这是对最基本的编址方法的改进，其标准 RFC 950 在 1985 年通过。</p>
+<p>（3）<strong>构成超网</strong>。这是比较新的无分类编址方法。 1993 年提出后很快就得到推广应用。</p>
+<p>所谓“分类的 IP 地址”就是将 IP 地址划分为若干个固定类，每一类地址都由两个固定长度的字段组成，其中第一个字段是<strong>网络号</strong>(net-id)，它标志主机（或路由器）所连接到的网络。一个网络号在整个互联网范围内必须是唯一的。第二个字段是<strong>主机号</strong>(host-id)，它标志该主机（或路由器）。一台主机号在它前面的网络号所指明的网络范围内必须是唯一的。 由此可见，一个 IP 地址在<strong>整个互联网范围内是唯一的</strong>。</p>
+<p>这种两级的 IP 地址可以记为：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tex">IP地址 ::== &#123;&lt;网络号&gt;，&lt;主机号&gt;&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2、分类的IP地址"><a href="#2、分类的IP地址" class="headerlink" title="2、分类的IP地址"></a>2、分类的IP地址</h4><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240427173502.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+
+
+
+<p>从上图可以看出：</p>
+<ul>
+<li>A 类、 B 类和 C 类地址的网络号字段（在图中这个字段是灰色的）分别为 1 个、 2 个和 3 个字节长，而在网络号字段的最前面有 1∼3 位的类别位，其数值分别规定为0， 10 和 110。</li>
+<li>A 类、 B 类和 C 类地址的主机号字段分别为 3 个、 2 个和 1 个字节长。</li>
+<li>D 类地址（前 4 位是 1110）用于多播（一对多通信）。</li>
+<li>E 类地址（前 4 位是 1111）保留为以后用。</li>
+</ul>
+<p>从 IP 地址的结构来看， IP 地址并不仅仅指明一台主机，而是还指明了主机所连接到的网络。</p>
+<p>把 IP 地址划分为 A 类、 B 类、 C 类三个类别，当初是这样考虑的。各种网络的差异很大，有的网络拥有很多主机，而有的网络上的主机则很少。把 IP 地址划分为 A 类、 B 类和C 类是为了更好地满足不同用户的要求。当某个单位申请到一个 IP 地址时，实际上是获得了具有同样网络号的一块地址。其中具体的各台主机号则由该单位自行分配，只要做到在该单位管辖的范围内无重复的主机号即可。</p>
+<p>对主机或路由器来说， IP 地址都是 32 位的二进制代码。为了提高可读性，我们常常把32 位的 IP 地址中的每 8 位插入一个空格（但在机器中并没有这样的空格）。为了便于书写，可用其等效的十进制数字表示，并且在这些数字之间加上一个点。这就叫做点分十进制记法(dotted decimal notation)。下图是一个 B 类 IP 地址的表示方法。显然， 128.11.3.31 比10000000 00001011 00000011 00011111 书写起来要方便得多。</p>
+<p>这种分类的IP地址由于网络号的位数是固定的，因此管理简单、使用方便、转发分组迅速，完全可以满足当时需求。后来，为了更加灵活地使用IP地址，出现了划分子网的方法，在IP地址的主机号中，插入一个子网号，把两级的IP地址变为三级的IP地址。但是，谁也没有预料到，互联网在20世纪90年代突然迅速地发展起来了。互联网从美国专用的科研实验网演变到世界范围开放的商用网!互联网用户的猛增，使得IP地址的数量面临枯竭的危险。这时，人们才注意到原来分类的IP地址在设计上确实有很不合理的地方。例如，一个A类网络地址块的主机号数目超过了1677 万个!当初美国的很多大学都可以分配到一个A类网络地址块。一个大学怎么会需要这样多的IP地址?但在互联网出现早期，人们就是认为IP地址是用不完的，不需要精打细算地分配。又如，一个 C类网络地址块可指派的主机号只有254个。但不少单位需要有300个以上的卫地址，那么干脆申请一个B类网络地址块(可以指派的主机号有6554个)， 宁可多要些卫地址，把多余的地址保留以后慢用。这样就浪费了不少的地址资源。<strong>即使后来采用了划分子网的方法，也无法解决IP地址枯竭的问题。</strong></p>
+<p>于定，在20世纪90年代当发现IP地址在不久后将会枯竭时，种新的无分类编址方法就何世了。这种方法虽然也无法解决IP地址枯竭的问题，但可以推迟IP地址用尽的日子。下一节就介绍现在已普遍采用的这种编址方法。</p>
+<h4 id="3-无分类编址CIDR"><a href="#3-无分类编址CIDR" class="headerlink" title="3. 无分类编址CIDR"></a>3. 无分类编址CIDR</h4><p> 它的正式名字是无分类域间路由选择 CIDR (Classless Inter-Domain Routing)。</p>
+<h5 id="1-网络前缀"><a href="#1-网络前缀" class="headerlink" title="(1)网络前缀"></a>(1)网络前缀</h5><ul>
+<li>CIDR 消除了传统的 A 类、B 类和 C 类地址以及划分子网的概念，因而可以更加有效地分配 IPv4 的地址空间。</li>
+<li>CIDR 使用各种长度的 “网络前缀” ( network-prefix ) 来代替分类地址中的网络号和子网号。</li>
+<li>IP 地址从三级编址（使用子网掩码）又回到了两级编址。</li>
+</ul>
+<p><strong>无分类的两级编址的记法是：</strong> </p>
+<p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240319220401.png" srcset="/img/loading.gif" lazyload></p>
+<p> CIDR 使用 “斜线记法” (slash notation)，它又称为 CIDR 记法，即在 IP 地址后面加上一个斜线 “<code>/</code>” ，然后写上网络前缀所占的位数（这个数值对应于三级编址中子网掩码中 1 的个数）。例如CIDR表示的一个IP地址128.14.35.7&#x2F;20二进制IP地址的前20位是网络前缀（相当于原来的网络号），剩下的后面12位是主机号。</p>
+<h5 id="（2）地址块"><a href="#（2）地址块" class="headerlink" title="（2）地址块"></a>（2）地址块</h5><p>CIDR 把网络前缀都相同的连续的 IP 地址组成 “CIDR 地址块”。</p>
+<p>128.14.32.0&#x2F;20</p>
+<p>③ 最小地址 : 最小地址就是主机号全0; 也就是地址块地址 ;</p>
+<p>10000000	00001110	0010<font color=LawnGreen>0000	00000000</font></p>
+<p>④ 最大地址 : 最大地址就是主机号全1 ;</p>
+<p>10000000	00001110	0010<font color=LawnGreen>1111	11111111</font></p>
+<p>⑤ 子网掩码 : 又称为“地址掩码” , 网络前缀对应的前20位为1,主机号对应的位数为0;</p>
+<p>11111111	11111111	11110000	00000000</p>
+<p>转为十进制为 : 255.255.240.0</p>
+<h5 id="（3）地址掩码"><a href="#（3）地址掩码" class="headerlink" title="（3）地址掩码"></a>（3）地址掩码</h5><p>128.14.32.0&#x2F;20</p>
+<p>⑤ 子网掩码 : 又称为“地址掩码” , 网络前缀对应的前20位为1,主机号对应的位数为0;</p>
+<p>11111111	11111111	11110000	00000000</p>
+<p>转为十进制为 : 255.255.240.0</p>
+<p>将二进制的IP地址和地址掩码<strong>按位</strong>AND运算，即可得出网络地址。</p>
+<p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240319183210.png" srcset="/img/loading.gif" lazyload></p>
+<p>CIDR地址中还有三个特殊的地址块，即：</p>
+<ul>
+<li>前缀n &#x3D; 32，即32位IP地址都是前缀，没有主机号。这其实就是一个IP地址。这其实就是一个IP地址。这个特殊地址用于<strong>主机路由</strong>。</li>
+<li>前缀n &#x3D; 31，这个地址块中只有两个IP地址，其主机号分别为0和1。这个地址快用于<strong>点对点链路</strong>。</li>
+<li>前缀n &#x3D; 0，同时IP地址也全是0，即0.0.0.0&#x2F;0。这用于<strong>默认路由</strong>。</li>
+</ul>
+<p>一个大的CIDR地址块中往往包含很多小地址快，所以在路由器的转发表中就利用较大的一个CIDR地址快来替代许多小的地址快。这种方法称为<strong>路由聚合</strong>。</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240320143820.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
+<h4 id="4-IP地址的特点"><a href="#4-IP地址的特点" class="headerlink" title="4. IP地址的特点"></a>4. IP地址的特点</h4><p>(1)每一个IP地址都由网络前级和主机号两部分组成。从这个意义上说，IP地址是一种分等级的地址结构。分两个等级的好处是:第一，IP 地址管理机构在分配IP地址时只分配网络前缀(第一级)，而剩下的主机号(第二级)则由得到该网络前级的单位自行分配，这样就方便了下地址的管理:第二，<strong>路由器根据目的主机所连接的网络前缀(即地址块)来转发分组</strong>(而不考虑目的主机号)，这样就可以使转发表中的项目数大幅度减少，从而减少转发表所占的存储空间，缩短查找转发表的时间。</p>
+<p>(2)实际上IP地址是标志台主机(或路由器)和一条链路的接口。<strong>当一台主机同时连接到两个网络上时，该主机就必须同时具有两个相应的IP地址，其网络前缀必须是不同的</strong>。这种主机称为<strong>多归属主机</strong>(multihomed hos).由于一个路由器至少应当连接到两个网络，因此一个路由器至少应当有两个不同的IP地址。这好比一一个建 筑正好处在北京路和上海路的交叉口上，那么这个建筑就可以拥有两个门牌号码。例如，北京路4号和上海路37号。</p>
+<p>(3)按照互联网的观点，一个网络 (或子网)是指具有相同网络前缀的主机的集合，因此，用转发器或交换机连接起来的若于个局域网仍为一个网络，因为这些局域网都具有同样的网络前缀。具有不同网络前缀的局域网必须使用路由器进行互连。</p>
+<p>(4)在IP地址中，所有分配到网络前缀的网络(不管是范围很小的局域网，还是可能覆盖很大地理范围的广域网)都是平等的。所谓平等，是指互联网同等对待每一个IP地址。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="print-no-link">#计算机网络基础</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>网络层1~2.2.2</div>
+      <div>http://example.com/2024/03/18/cn_网络层01，02.2.2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>niajx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/24/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Java新特性">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java新特性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/10/str4/" title="字符串篇四">
+                        <span class="hidden-mobile">字符串篇四</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/chjpqqdsjyf.jpg">
 <meta property="article:published_time" content="2024-04-26T08:28:30.000Z">
-<meta property="article:modified_time" content="2024-04-26T08:31:31.636Z">
+<meta property="article:modified_time" content="2024-04-26T14:52:03.678Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          332 字
+          397 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -283,6 +283,10 @@
 
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-consecutive-sequence/description/">128. 最长连续序列 - 力扣（LeetCode）</a></p>
 <p>这个题如果不用暴力的话我踏马还真想不起来用啥~~~</p>
+<p>我做了一遍之后开始不明白为啥就要非得判断<code>if (!set.contains(e - 1))</code>我不能从大向着小判断吗？</p>
+<ul>
+<li>其实这两个都可以，但是它的目的就是为了寻找连续的那一个极值点。</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestConsecutive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>		Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> e : nums) set.add(e);<br>		<span class="hljs-type">int</span> <span class="hljs-variable">ret</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> e : nums)&#123;<br>			<span class="hljs-keyword">if</span> (!set.contains(e - <span class="hljs-number">1</span>))&#123;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">cur_Num</span> <span class="hljs-operator">=</span> e;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">cur_long</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>				<span class="hljs-keyword">while</span> (set.contains(cur_Num + <span class="hljs-number">1</span>))&#123;<br>					cur_Num++;<br>					cur_long++;<br>				&#125;<br>				ret = Math.max(ret, cur_long);<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> ret;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-pattern/">290. 单词规律 - 力扣（LeetCode）</a></p>
