@@ -16,24 +16,24 @@
   <meta name="author" content="niajx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="217. 存在重复元素 - 力扣（LeetCode） 123456789101112class Solution &amp;#123;	public boolean containsDuplicate(int[] nums) &amp;#123;		int n &#x3D; nums.length;		Map&lt;Integer, Integer&gt; map &#x3D; new HashMap&lt;&gt;();		for">
+    <meta name="description" content="100284. 有效单词 - 力扣（LeetCode） 这一道题完全拿下，到最后发现其实不用对于数字进行判断 12345678910111213141516171819202122class Solution &amp;#123;    public boolean isValid(String word) &amp;#123;        if (word.length() &lt; 3) return fa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashTableⅠ">
-<meta property="og:url" content="http://example.com/2024/04/26/HashTable1/index.html">
+<meta property="og:title" content="LC第396场周赛">
+<meta property="og:url" content="http://example.com/2024/05/05/week_match003/index.html">
 <meta property="og:site_name" content="kyclnx">
-<meta property="og:description" content="217. 存在重复元素 - 力扣（LeetCode） 123456789101112class Solution &amp;#123;	public boolean containsDuplicate(int[] nums) &amp;#123;		int n &#x3D; nums.length;		Map&lt;Integer, Integer&gt; map &#x3D; new HashMap&lt;&gt;();		for">
+<meta property="og:description" content="100284. 有效单词 - 力扣（LeetCode） 这一道题完全拿下，到最后发现其实不用对于数字进行判断 12345678910111213141516171819202122class Solution &amp;#123;    public boolean isValid(String word) &amp;#123;        if (word.length() &lt; 3) return fa">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/chjpqqdsjyf.jpg">
-<meta property="article:published_time" content="2024-04-26T08:28:30.000Z">
-<meta property="article:modified_time" content="2024-04-26T14:52:03.678Z">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/mo2dbr3nsak.jpg">
+<meta property="article:published_time" content="2024-05-05T08:59:30.000Z">
+<meta property="article:modified_time" content="2024-05-05T09:30:47.426Z">
 <meta property="article:author" content="niajx">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="周赛">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/chjpqqdsjyf.jpg">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/mo2dbr3nsak.jpg">
   
   
   
-  <title>HashTableⅠ - kyclnx</title>
+  <title>LC第396场周赛 - kyclnx</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,13 +193,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/chjpqqdsjyf.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/mo2dbr3nsak.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HashTableⅠ"></span>
+            <span id="subtitle" data-typed-text="LC第396场周赛"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-26 16:28" pubdate>
-          2024年4月26日 下午
+        <time datetime="2024-05-05 16:59" pubdate>
+          2024年5月5日 下午
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          397 字
+          347 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -270,29 +270,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">HashTableⅠ</h1>
+            <h1 id="seo-header">LC第396场周赛</h1>
             
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/contains-duplicate/description/">217. 存在重复元素 - 力扣（LeetCode）</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">containsDuplicate</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>		Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> e : nums) map.put(e, map.getOrDefault(e, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet())&#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">v</span> <span class="hljs-operator">=</span> entry.getValue();<br>			<span class="hljs-keyword">if</span> (v &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-word/description/">100284. 有效单词 - 力扣（LeetCode）</a></p>
+<p>这一道题完全拿下，到最后发现其实不用对于数字进行判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String word)</span> &#123;<br>        <span class="hljs-keyword">if</span> (word.length() &lt; <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">bs_Letter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : word.toCharArray())&#123;<br>            <span class="hljs-keyword">if</span> (Character.isLetterOrDigit(c))&#123;<br>                <span class="hljs-keyword">if</span> (Character.isLetter(c)) bs_Letter.append(Character.toLowerCase(c));<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : bs_Letter.toString().toCharArray())&#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;a&#x27;</span>|| c == <span class="hljs-string">&#x27;e&#x27;</span> || c == <span class="hljs-string">&#x27;i&#x27;</span>|| c == <span class="hljs-string">&#x27;o&#x27;</span>|| c == <span class="hljs-string">&#x27;u&#x27;</span>)&#123;<br>                a++;<br>            &#125;<span class="hljs-keyword">else</span> b++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">1</span> || b &lt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/description/">349. 两个数组的交集 - 力扣（LeetCode）</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] intersection(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2) &#123;<br>		Set&lt;Integer&gt; set1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>		Set&lt;Integer&gt; set2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> e : nums1) set1.add(e);<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> e : nums2) set2.add(e);<br>		List&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (Integer e : set2)&#123;<br>			<span class="hljs-keyword">if</span> (set1.contains(e))&#123;<br>				ans.add(e);<br>			&#125;<br>		&#125;<br>		<span class="hljs-type">int</span>[] ret = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[ans.size()];<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; ans.size(); i++) &#123;<br>			ret[i] = ans.get(i);<br>		&#125;<br>		<span class="hljs-keyword">return</span> ret;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-operations-to-make-word-k-periodic/description/">100275. K 周期字符串需要的最少操作次数 - 力扣（LeetCode）</a></p>
+<p>这一道题也是完全拿下的，发现规律之后挺容易的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumOperationsToMakeKPeriodic</span><span class="hljs-params">(String word, <span class="hljs-type">int</span> k)</span> &#123;<br>        Map&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> word.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i += k) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">v</span> <span class="hljs-operator">=</span> word.substring(i,i + k);<br>            map.put(v, map.getOrDefault(v, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (Integer c : map.values())&#123;<br>           a =  Math.max(a, c);<br>        &#125;<br>        <span class="hljs-keyword">return</span> n/k - a;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-consecutive-sequence/description/">128. 最长连续序列 - 力扣（LeetCode）</a></p>
-<p>这个题如果不用暴力的话我踏马还真想不起来用啥~~~</p>
-<p>我做了一遍之后开始不明白为啥就要非得判断<code>if (!set.contains(e - 1))</code>我不能从大向着小判断吗？</p>
-<ul>
-<li>其实这两个都可以，但是它的目的就是为了寻找连续的那一个极值点。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestConsecutive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>		Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> e : nums) set.add(e);<br>		<span class="hljs-type">int</span> <span class="hljs-variable">ret</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> e : nums)&#123;<br>			<span class="hljs-keyword">if</span> (!set.contains(e - <span class="hljs-number">1</span>))&#123;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">cur_Num</span> <span class="hljs-operator">=</span> e;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">cur_long</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>				<span class="hljs-keyword">while</span> (set.contains(cur_Num + <span class="hljs-number">1</span>))&#123;<br>					cur_Num++;<br>					cur_long++;<br>				&#125;<br>				ret = Math.max(ret, cur_long);<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> ret;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-length-of-anagram-concatenation/description/">3138. 同位字符串连接的最小长度 - 力扣（LeetCode）</a></p>
+<p>这道题目没有拿下，想到了求出每一个单词的数量，但是没有想得到求公约数（求公约数这一招确实很妙）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>&#123;<br>        <span class="hljs-keyword">if</span>(a % b == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> b;<br>        <span class="hljs-keyword">return</span> gcd(b, a % b);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minAnagramLength</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] cnt = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> c : s.toCharArray()) cnt[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length(), res = n;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++)&#123;<br>            <span class="hljs-keyword">if</span>(cnt[i] != <span class="hljs-number">0</span>)&#123;<br>                res = gcd(res, cnt[i]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> n/res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-pattern/">290. 单词规律 - 力扣（LeetCode）</a></p>
-<p>这个简单题挺难的，也挺怪的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">wordPattern</span><span class="hljs-params">(String pattern, String s)</span> &#123;<br>        Map&lt;Character, String&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        String[] v = s.split(<span class="hljs-string">&quot; &quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> pattern.length();<br>        <span class="hljs-keyword">if</span>(len != v.length) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; len; i++)&#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> pattern.charAt(i);<br>            <span class="hljs-keyword">if</span>(!map.containsKey(c))&#123;<br>                <span class="hljs-keyword">if</span>(map.containsValue(v[i])) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                map.put(c, v[i]);<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!map.get(c).equals(v[i])) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<p>第四道就算了呜呜呜~~~</p>
 
                 
               </div>
@@ -326,7 +321,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
+        <a href="/tags/%E5%91%A8%E8%B5%9B/" class="print-no-link">#周赛</a>
       
     </div>
   
@@ -338,8 +333,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HashTableⅠ</div>
-      <div>http://example.com/2024/04/26/HashTable1/</div>
+      <div>LC第396场周赛</div>
+      <div>http://example.com/2024/05/05/week_match003/</div>
     </div>
     <div class="license-meta">
       
@@ -351,7 +346,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月26日</div>
+          <div>2024年5月5日</div>
         </div>
       
       
@@ -383,18 +378,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/05/week_match003/" title="LC第396场周赛">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC第396场周赛</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/24/face_OS1/" title="操作系统">
-                        <span class="hidden-mobile">操作系统</span>
+                      <a href="/2024/04/26/HashTable1/" title="HashTableⅠ">
+                        <span class="hidden-mobile">HashTableⅠ</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
