@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3omevqfqpik.jpg">
 <meta property="article:published_time" content="2024-05-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-07T00:10:38.003Z">
+<meta property="article:modified_time" content="2024-05-09T00:38:11.414Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="sql语句练习">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          366 字
+          1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          9 分钟
         
       </span>
     
@@ -374,6 +374,67 @@
 
 
 
+
+
+<h2 id="1、groupBy"><a href="#1、groupBy" class="headerlink" title="1、groupBy"></a>1、groupBy</h2><p>前提：建表语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `staff` (<br>  `id` <span class="hljs-type">bigint</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="hljs-string">&#x27;主键id&#x27;</span>,<br>  `id_card` <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;身份证号码&#x27;</span>,<br>  `name` <span class="hljs-type">varchar</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;姓名&#x27;</span>,<br>  `age` <span class="hljs-type">int</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;年龄&#x27;</span>,<br>  `city` <span class="hljs-type">varchar</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;城市&#x27;</span>,<br>  <span class="hljs-keyword">PRIMARY</span> KEY (`id`)<br>) ENGINE<span class="hljs-operator">=</span>InnoDB AUTO_INCREMENT<span class="hljs-operator">=</span><span class="hljs-number">15</span> <span class="hljs-keyword">DEFAULT</span> CHARSET<span class="hljs-operator">=</span>utf8 COMMENT<span class="hljs-operator">=</span><span class="hljs-string">&#x27;员工表&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240507085302.png" srcset="/img/loading.gif" lazyload></p>
+<p>1、统计每一个城市员工的数量</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> city, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> num<br><span class="hljs-keyword">FROM</span> staff<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> city;<br></code></pre></td></tr></table></figure>
+
+<p><code>as  num</code>将新的城市员工的数量这一列的索引置为num</p>
+<p>分析一下底层的执行流程</p>
+<h2 id="2、group-By原理分析"><a href="#2、group-By原理分析" class="headerlink" title="2、group By原理分析"></a>2、group By原理分析</h2><h3 id="2-1、explain分析"><a href="#2-1、explain分析" class="headerlink" title="2.1、explain分析"></a>2.1、explain分析</h3><p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240507090045.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>extra这个字段的<code>Using temporary</code>表示在执行分组的时候使用了临时表。</li>
+</ul>
+<blockquote>
+<p>创建内存临时表，表中具有两个字段，city和num。</p>
+<p>全表扫描stuff的记录，依次取出city &#x3D; ‘X’的记录。</p>
+<ul>
+<li>判断临时表中具有city &#x3D; ‘X’的行，没有就插入一个记录(x, 1)；</li>
+<li>如果临时表中具有city &#x3D; ‘X’的 行的行，就是将x这一行的num + 1；</li>
+</ul>
+</blockquote>
+<h2 id="3、where-和-having的区别"><a href="#3、where-和-having的区别" class="headerlink" title="3、where 和 having的区别"></a>3、where 和 having的区别</h2><ul>
+<li>group by + where 的执行流程</li>
+<li>group by + having的执行流程</li>
+<li>同时有where、group by、having的执行顺序</li>
+</ul>
+<h3 id="3-1、group-by-where的执行流程"><a href="#3-1、group-by-where的执行流程" class="headerlink" title="3.1、group by + where的执行流程"></a>3.1、group by + where的执行流程</h3><p>2、筛选出年龄大于19岁的员工，并按城市分组，统计每个城市的员工数量，最后按员工数量升序排列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> city, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> num<br><span class="hljs-keyword">FROM</span> staff<br><span class="hljs-keyword">WHERE</span> age <span class="hljs-operator">&gt;</span> <span class="hljs-number">19</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> city<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> num <span class="hljs-keyword">ASC</span>;<br></code></pre></td></tr></table></figure>
+
+<p>执行流程如下：</p>
+<ol>
+<li>创建内存临时表，表里有两个字段city和num；</li>
+<li>扫描索引树idx_age，找到大于年龄大于30的主键ID</li>
+<li>通过主键ID，回表找到city &#x3D; ‘X’</li>
+</ol>
+<ul>
+<li>判断<strong>临时表</strong>中是否有为 city&#x3D;’X’的行，没有就插入一个记录 (X,1);</li>
+<li>如果临时表中有city&#x3D;’X’的行的行，就将x 这一行的num值加 1；</li>
+</ul>
+<ol>
+<li>继续重复2,3步骤，找到所有满足条件的数据，</li>
+<li>最后根据字段city做<strong>排序</strong>，得到结果集返回给客户端。</li>
+</ol>
+<h3 id="3-2、group-by-having的执行流程"><a href="#3-2、group-by-having的执行流程" class="headerlink" title="3.2、group by + having的执行流程"></a>3.2、group by + having的执行流程</h3><p>3、查询每个城市的员工数量，获取到员工数量不低于3的城市，having可以很好解决你的问题</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> city, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> num<br><span class="hljs-keyword">FROM</span> staff<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> city<br><span class="hljs-keyword">HAVING</span> num <span class="hljs-operator">&gt;=</span> <span class="hljs-number">3</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-3、同时有where、group-by、having的执行顺序"><a href="#3-3、同时有where、group-by、having的执行顺序" class="headerlink" title="3.3、同时有where、group by、having的执行顺序"></a>3.3、同时有where、group by、having的执行顺序</h3><p>4、筛选出年龄大于19岁的员工，并按城市分组，统计每个城市的员工数量，选出员工数量大于3的城市</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> city, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> num<br><span class="hljs-keyword">FROM</span> staff<br><span class="hljs-keyword">WHERE</span> age <span class="hljs-operator">&gt;</span> <span class="hljs-number">19</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> city<br><span class="hljs-keyword">HAVING</span> num <span class="hljs-operator">&lt;</span> <span class="hljs-number">3</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-4、Having和where的区别"><a href="#3-4、Having和where的区别" class="headerlink" title="3.4、Having和where的区别"></a>3.4、Having和where的区别</h3><ul>
+<li>having子句用于<strong>分组后的筛选</strong>，where子句用于行条件筛选</li>
+<li>having一般都是配合group by和聚合函数一起出现的如(count(),sum(),avg(),max(),min())</li>
+<li>where条件子句中不能使用聚合函数，而having子句就可以</li>
+<li>having只能放在group之后，where执行在group by之前</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/actors-and-directors-who-cooperated-at-least-three-times/submissions/530314283/">1050. 合作过至少三次的演员和导演 - 力扣（LeetCode）</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> actor_id, director_id<br><span class="hljs-keyword">from</span> ActorDirector<br><span class="hljs-keyword">Group</span> <span class="hljs-keyword">by</span> actor_id, director_id<br><span class="hljs-keyword">Having</span> <span class="hljs-built_in">count</span>(<span class="hljs-type">timestamp</span>) <span class="hljs-operator">&gt;</span> <span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
+
+<p>这个题目中，如果用<code>select actor_id, director_id, count(timestamp) as num</code>会更好理解一些</p>
 
                 
               </div>
