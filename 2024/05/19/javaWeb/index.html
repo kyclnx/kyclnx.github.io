@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/%E4%B8%8B%E8%BD%BD.png">
 <meta property="article:published_time" content="2024-05-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-20T07:06:44.345Z">
+<meta property="article:modified_time" content="2024-05-20T15:48:25.650Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="java+学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          709 字
+          1.1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          6 分钟
+          10 分钟
         
       </span>
     
@@ -325,6 +325,43 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Address</span> &#123;<br>    <span class="hljs-keyword">private</span> String province;<br>    <span class="hljs-keyword">private</span> String city;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>请求的URL：<code>http://localhost/complexPojo?name=nian&amp;age=22&amp;address.province=北京&amp;address.city=北京</code></p>
+<h2 id="数组集合参数"><a href="#数组集合参数" class="headerlink" title="数组集合参数"></a>数组集合参数</h2><ul>
+<li>数组参数：请求参数名称与形参数组名称相同且请求参数为多个，定义数组类型形参即可接收参数</li>
+</ul>
+<p>请求路径<code>localhost:80/arrayParam?hobby=game&amp;hobby=java&amp;hobby=string</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/arrayParam&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">arrayParam</span><span class="hljs-params">(String[] hobby)</span>&#123;<br>    System.out.println(Arrays.toString(hobby));<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>集合参数：请求参数名称与形参名称相同，且请求参数为多个@RequestParam绑定参数关系。</li>
+</ul>
+<p>请求路径<code>localhost:80/listParam?hobby=game&amp;hobby=java&amp;hobby=string</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/listParam&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">listParam</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> List&lt;String&gt; hobby)</span> &#123;<br>    System.out.println(hobby);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="日期时间类型参数"><a href="#日期时间类型参数" class="headerlink" title="日期时间类型参数"></a>日期时间类型参数</h2><ul>
+<li>日期参数：使用@DataTimeFormat注解完成日期参数格式转换</li>
+</ul>
+<p>请求路径：<code>localhost:80/dateParam/?updateTime=2024-12-12 10:00:00</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/dateParam&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">dateParam</span><span class="hljs-params">(<span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span> LocalDateTime  updateTime)</span> &#123;<br>    System.out.println(updateTime);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Json参数"><a href="#Json参数" class="headerlink" title="Json参数"></a>Json参数</h2><ul>
+<li>Json参数：JSON数据的键名与形参对象的属性名相同，定义POJO类型形参即可接收参数，需要使用@RequestBody标识</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;kyclnx&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;address&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;province&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;陕西&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;咸阳&quot;</span> <br>    <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>请求路径：<code>localhost:80/jsonParam</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/jsonParam&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">jsonParam</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> User user)</span> &#123;<br>    System.out.println(user);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h2><ul>
+<li>路径参数:通过请求URL直接传递参数，使用{……}来标识该路径参数，需要使用 @PathVariable 获取路径参数</li>
+</ul>
+<p>请求路径：<code>localhost:80/path/12</code></p>
+<p>后面的12可以是任意数字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/path/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">pathParam</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> String id)</span> &#123;<br>    System.out.println(id);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果路径参数有多个</p>
+<p>请求路径：<code>localhost:80/path/1/it</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/path/&#123;id&#125;/&#123;name&#125;&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">pathParam</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Integer id, <span class="hljs-meta">@PathVariable</span> String name)</span> &#123;<br>    System.out.println(id + <span class="hljs-string">&quot;:&quot;</span> +name);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
