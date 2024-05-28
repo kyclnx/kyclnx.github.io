@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>TCP/UDP</title>
+    <link href="/2024/05/28/cn_TCP_UDP/"/>
+    <url>/2024/05/28/cn_TCP_UDP/</url>
+    
+    <content type="html"><![CDATA[<p><strong>总结</strong><br>TCP是面向连接的，UDP是无连接的<br>TCP是可靠的，UDP是不可靠的<br>TCP是面向字节流的，UDP是面向数据报文的<br>TCP只支持点对点通信，UDP支持一对一，一对多，多对多<br>TCP报文首部20个字节，UDP首部8个字节<br>TCP有拥塞控制机制，UDP没有<br>TCP协议下双方发送接受缓冲区都有，UDP并无实际意义上的发送缓冲区，但是存在接受缓冲区</p><p><strong>TCP是面向连接的，UDP是无连接的</strong><br>在TCP协议进行网络通信时，需要先建立连接，也就是说需要先将客户端与服务器的连接连好，然后在进行数据交互。</p><ul><li>服务器的listen()函数和accept() 函数确保了连接的建立</li></ul><p><strong>因为使用TCP协议时，Linux内核协议栈为TCP连接创建了两个队列</strong></p><ul><li><p>半连接队列：用来保存处于SYN_SENT 和 SYN_RECV状态的请求</p></li><li><p>全连接队列：accept队列，用来保存正在数据交互（established状态）的客户端连接</p></li></ul><p>全连接队列长度 &#x3D;&#x3D; 套接字函数listen()的第二个参数+1</p><p>TCP是可靠的，UDP是不可靠的<br>TCP使用一下方式保证自身发送接受数据可靠</p><ul><li>数据包校验（16为数据校验和）防止发送过来的数据是错误数据</li><li>确认序列号，对失序报文进行重排</li><li>丢弃重复数据包，防止数据冗余重复</li><li>确认应答机制，接收方接受数据之后会发送一个确认</li><li>超时重传机制，发送方发出数据后会启动一个定时器，超过该定时器时间依旧未收到对方确认，便会重新发送该数据<br>流量控制（16位窗口大小）确保接收方收到的数据在自身缓冲区中不会溢出</li><li>拥塞控制，保证数据在网络中传播的可靠性，降低丢包的概率，提高TCP的可靠性</li></ul><p><strong>UDP没有上述TCP机制</strong></p><p>并且如果校验和出错，则UDP会将该报文丢弃</p><p><strong>TCP面向字节流，UDP面向数据报</strong><br>面向字节流是以字节为单位发送数据，并且一个数据包可以以字节大小来拆分成多个数据包，以方便发送。<br>TCP可以先将数据存放在发送缓冲区中，可以等待数据到一定大小发送，也可以直接发送，没有固定大小可言。<br>UDP需要每次发送都需要发送固定长度的数据包，如果长度过长需要应用层协议主动将其裁剪到适合长度。</p><p><strong>TCP只支持点对点通信，UDP支持一对一，一对多，多对多</strong><br>TCP需要双方建立连接，所以需要点对点通信。<br>UDP则无需这么复杂。</p><p><strong>TCP有拥塞控制机制，UDP没有</strong><br>TCP的拥塞控制可是保证了TCP协议在网络中传输的可靠性，降低重传和丢包的概率。UDP不存在。</p><p><strong>TCP协议下双方发送接受缓冲区都有，UDP并无实际意义上的发送缓冲区，但是存在接受缓冲区</strong><br>两者都是全双工，但是UDP需要将自身发送数据先转给Linux内核，然后再由内核发送出去。TCP则是运用自身的滑动窗口来发送数据，并且保证了数据的可靠性。</p><p><strong>什么时候选TCP or UDP</strong><br>对某些实时性要求比较高的情况，选择UDP，比如游戏，媒体通信，实时视频流（直播），即使出现传输错误也可以容忍；其它大部分情况下，HTTP都是用TCP，因为要求传输的内容可靠，不出现丢失</p><p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240528091118.png" style="zoom: 55%;" /><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240528091400.png" style="zoom:55%;" /></p><p> 用户数据报UDP有两个字段：数据字段和首部字段。首部字段很简单，只有8个字节，由四个字段组成，每个字段的长度都是两个字节。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机网络</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>计算机网络基础</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>web学习</title>
     <link href="/2024/05/19/javaWeb/"/>
     <url>/2024/05/19/javaWeb/</url>
