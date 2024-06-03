@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/97b97ee1173042d5ba667df7ecbe43f6.png">
 <meta property="article:published_time" content="2024-06-02T13:22:30.000Z">
-<meta property="article:modified_time" content="2024-06-02T13:34:55.021Z">
+<meta property="article:modified_time" content="2024-06-03T00:57:36.591Z">
 <meta property="article:author" content="niajx">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.2k 字
         
       </span>
     
@@ -338,7 +338,7 @@
 <blockquote>
 <p>docker安装一个tomcat</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">官方的使用方法</span><br>docker run -it --rm tomcat:9.0<br><span class="hljs-meta prompt_">#</span><span class="language-bash">我们之前的启动都是后台，停止了容器之后，容器还可以再查得到   docker -it --<span class="hljs-built_in">rm</span> tomcat:9.0，一般用来进行测试，用完就删除</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">先下载，再启动</span><br>docker pull tomcat<br><span class="hljs-meta prompt_">#</span><span class="language-bash">启动运行</span><br> docker run -d -p 3355:8080 --name tomcat01 tomcat<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"> #</span><span class="language-bash">测试访问没有问题</span><br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"> #</span><span class="language-bash">进入容器</span><br> root@LAPTOP-10L6P3UV:/mnt/c/Users/17083/Desktop# docker exec -it tomcat01 /bin/bash<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"> #</span><span class="language-bash">发现它没有webapps，镜像的原因，默认是最小的镜像，所有不必要的都会剔除，保证最小的可运行的环境！</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">官方的使用方法</span><br>docker run -it --rm tomcat:9.0<br><span class="hljs-meta prompt_">#</span><span class="language-bash">我们之前的启动都是后台，停止了容器之后，容器还可以再查得到   docker -it --<span class="hljs-built_in">rm</span> tomcat:9.0，一般用来进行测试，用完就删除</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">先下载，再启动</span><br>docker pull tomcat<br><span class="hljs-meta prompt_">#</span><span class="language-bash">启动运行</span><br> docker run -d -p 3355:8080 --name tomcat01 tomcat<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"> #</span><span class="language-bash">测试访问没有问题</span><br> cp -r webapps.dist/* webapps                   <br><span class="hljs-meta prompt_"> #</span><span class="language-bash">进入容器                                                  <span class="hljs-comment"># 将webapps.dist中的全部内容复制到webapps中去</span></span><br> root@LAPTOP-10L6P3UV:/mnt/c/Users/17083/Desktop           # docker exec -it tomcat01 /bin/bash<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"> #</span><span class="language-bash">发现它没有webapps，镜像的原因，默认是最小的镜像，所有不必要的都会剔除，保证最小的可运行的环境！</span><br></code></pre></td></tr></table></figure>
 
 <p>如果每次进入容器都会非常的麻烦，我们要是可以在容器的外面提供一个映射的路径，webapps，我们再外面放置项目，就自动同步到内部就很好了。</p>
 <blockquote>
