@@ -1,0 +1,751 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/save_picture/OIP.jpg">
+  <link rel="icon" href="/img/save_picture/OIP.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="niajx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="端口一、Windows环境查看端口的情况 查找所有运行的端口  1netstat -ano			              #该命令列出所有端口的使用情况   查找哪些进程在使用哪一个端口  1netstat -ano | findstr :端口号			#该命令用于查找哪一个进程在使用这个端口号  example 1234567PS C:\Users\Administrator&gt; netst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PORT AND PROCESS">
+<meta property="og:url" content="http://example.com/2024/08/31/Linux-PORT/index.html">
+<meta property="og:site_name" content="kyclnx">
+<meta property="og:description" content="端口一、Windows环境查看端口的情况 查找所有运行的端口  1netstat -ano			              #该命令列出所有端口的使用情况   查找哪些进程在使用哪一个端口  1netstat -ano | findstr :端口号			#该命令用于查找哪一个进程在使用这个端口号  example 1234567PS C:\Users\Administrator&gt; netst">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/a202c44c2075478dbfac39baeb800046.png">
+<meta property="article:published_time" content="2024-08-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-31T14:47:17.994Z">
+<meta property="article:author" content="niajx">
+<meta property="article:tag" content="Linux命令">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/a202c44c2075478dbfac39baeb800046.png">
+  
+  
+  
+  <title>PORT AND PROCESS - kyclnx</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":130,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>kyclnx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/a202c44c2075478dbfac39baeb800046.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PORT AND PROCESS"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-31 00:00" pubdate>
+          2024年8月31日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          836 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PORT AND PROCESS</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h1><h2 id="一、Windows环境"><a href="#一、Windows环境" class="headerlink" title="一、Windows环境"></a>一、Windows环境</h2><h3 id="查看端口的情况"><a href="#查看端口的情况" class="headerlink" title="查看端口的情况"></a>查看端口的情况</h3><ul>
+<li>查找所有运行的端口</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">netstat -ano			              #该命令列出所有端口的使用情况<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>查找哪些进程在使用哪一个端口</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">netstat -ano | findstr :端口号			#该命令用于查找哪一个进程在使用这个端口号<br></code></pre></td></tr></table></figure>
+
+<p>example</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">PS C:\Users\Administrator&gt; netstat -ano | findstr :80<br>  TCP    0.0.0.0:80             0.0.0.0:0              LISTENING       19172<br>  TCP    10.0.166.165:49154     157.255.5.249:8080     ESTABLISHED     10528<br>  TCP    10.0.166.165:52123     111.30.170.28:8081     TIME_WAIT       0<br>  TCP    [::]:80                [::]:0                 LISTENING       19172<br>  UDP    [fe80::f006:80df:58cd:e046%12]:1900  *:*                                    7880<br>  UDP    [fe80::f006:80df:58cd:e046%12]:60409  *:*                                   7880<br></code></pre></td></tr></table></figure>
+
+<p><code>TCP 0.0.0.0:80 0.0.0.0:0 LISTENING 19172</code></p>
+<ul>
+<li>这表示有一个进程正在监听所有IPV4地址的端口80，进程id为19172。通常这表示一个Web服务器正在运行并且等待连接。</li>
+</ul>
+<p><code>TCP 10.0.166.165:49154 157.255.5.249:8080 ESTABLISHED 10528</code></p>
+<ul>
+<li>这表示有一个从本地地址10.0.166.165的49154端口到远程ip地址157.255.5.249的8080端口的tcp连接已经建立进程id为10528。</li>
+</ul>
+<p><code>TCP 10.0.166.165:52123 111.30.170.28:8081 TIME_WAIT 0</code></p>
+<ul>
+<li>这表示有一个从本地IP地址10.0.166.165的52123端口到远程IP地址111.30.170.28的8081端口的TCP连接已经关闭，目前处于TIME_WAIT状态。</li>
+</ul>
+<p><code>UDP [fe80::f006:80df:58cd:e046%12]:1900 *:* 7880</code></p>
+<ul>
+<li>这表示有一个进程正在监听IPv6地址的1900端口（通常用于UPnP），进程ID为7880。</li>
+</ul>
+<p>为什么输出80端口的有关联的信息会输出其他的端口的一些信息？</p>
+<p>尽管这个连接的端口是8080而不是80，但它可能与80端口的服务有关联，特别是如果它们属于同一个应用程序或服务，并且8080端口被用作80端口的替代或补充。</p>
+<h3 id="查看进程的情况"><a href="#查看进程的情况" class="headerlink" title="查看进程的情况"></a>查看进程的情况</h3><p><code>get-process</code>命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">-name 名字<br>-id   进程id<br></code></pre></td></tr></table></figure>
+
+<p>example</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">PS C:\Users\Administrator&gt; get-process -id 19172             #查看这个进程详细信息<br>Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName<br>-------  ------    -----      -----     ------     --  -- -----------<br>    540      32   458936     104900       2.20  19172   9 java<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">stop-process -id 19172			#停止这个进程<br></code></pre></td></tr></table></figure>
+
+<h2 id="二、Linux环境"><a href="#二、Linux环境" class="headerlink" title="二、Linux环境"></a>二、Linux环境</h2><h3 id="查看端口的情况-1"><a href="#查看端口的情况-1" class="headerlink" title="查看端口的情况"></a>查看端口的情况</h3><h4 id="ss命令（socket-statistics）"><a href="#ss命令（socket-statistics）" class="headerlink" title="ss命令（socket statistics）"></a>ss命令（socket statistics）</h4><table>
+<thead>
+<tr>
+<th>后面可跟参数</th>
+<th>释义</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>–all</td>
+<td>显示所有套接字</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>–listening</td>
+<td>显示监听状态的套接字</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>–extended</td>
+<td>显示详细的套接字信息</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>–memory</td>
+<td>显示套接字的内存使用情况</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>–processes</td>
+<td>显示使用套接字的进程</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>–info</td>
+<td>显示 TCP内部信息</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>–summary</td>
+<td>显示套接字使用概况</td>
+</tr>
+<tr>
+<td>-4</td>
+<td>–ipv4</td>
+<td>仅显示IPv4的套接字</td>
+</tr>
+<tr>
+<td>-6</td>
+<td>–ipv6</td>
+<td>仅显示IPv6的套接字</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>–tcp</td>
+<td>仅显示 TCP套接字</td>
+</tr>
+</tbody></table>
+<p>过滤出监听在某一个端口的套接字信息</p>
+<p><code>ss -al |grep :3355</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">kyclnx@uuu:~$ ss -al |grep :3355<br>tcp                LISTEN              0                    4096                                                                                        0.0.0.0:3355                                      0.0.0.0:*<br>tcp                LISTEN              0                    4096                                                                                           [::]:3355                                         [::]:*<br></code></pre></td></tr></table></figure>
+
+<p>4096是缓冲区的大小（接受缓冲区的大小）。</p>
+<h4 id="lsof命令"><a href="#lsof命令" class="headerlink" title="lsof命令"></a>lsof命令</h4><p>这个命令的参数很杂，这里讲一下我主要的用途吧。<strong>要用管理员的权限使用此命令</strong></p>
+<p>首先我在Ubuntu上的Docker面开了一个tomcat端口，然后映射到主机3355端口，我想查看这个3355端口的进程号。</p>
+<p>1、找到套接字的文件描述符。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">kyclnx@uuu:~$ docker ps<br>CONTAINER ID   IMAGE     COMMAND             CREATED       STATUS       PORTS                                       NAMES<br>820de0cf8341   tomcat    &quot;catalina.sh run&quot;   2 hours ago   Up 2 hours   0.0.0.0:3355-&gt;8080/tcp, :::3355-&gt;8080/tcp   inspiring_mccarthy<br>kyclnx@uuu:~$ lsof -i:3355                  #普通用户无法使用这个命令<br>kyclnx@uuu:~$ sudo lsof -i:3355<br>[sudo] password for kyclnx:<br>COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>docker-pr 3650 root    4u  IPv4  51230      0t0  TCP *:3355 (LISTEN)<br>docker-pr 3656 root    4u  IPv6  51235      0t0  TCP *:3355 (LISTEN)<br></code></pre></td></tr></table></figure>
+
+<p>为什么开启一个监听的端口会有两个进程？</p>
+<p>分别对应于IPv4（<code>docker-pr 3650</code>）和IPv6（<code>docker-pr 3656</code>）地址。这意味着，无论客户端使用IPv4还是IPv6地址连接到端口3355，Docker容器都可以接收和处理请求。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux%E5%91%BD%E4%BB%A4/" class="print-no-link">#Linux命令</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PORT AND PROCESS</div>
+      <div>http://example.com/2024/08/31/Linux-PORT/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>niajx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/07/spr2/" title="IOC/DI学习">
+                        <span class="hidden-mobile">IOC/DI学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
