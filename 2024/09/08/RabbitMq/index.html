@@ -1,0 +1,779 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/save_picture/OIP.jpg">
+  <link rel="icon" href="/img/save_picture/OIP.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="niajx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RabbitMQ同步通信和异步通信同步通信：实时性强，一个时刻只能对应一个人，类似于打电话 异步通信：同一时刻，可以实现一对多，类似于微信聊天     同步调用：  可以立刻得到响应的结果，时效性强。  拓展性差。性能下降。级联失败。   异步调用： 异步调用方式其实就是基于消息通知的方式，一般包含三个角色  消息发送者:投递消息的人，就是原来的调用方  消息代理:管理、暂存、转发消息，你可以把它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ">
+<meta property="og:url" content="http://example.com/2024/09/08/RabbitMq/index.html">
+<meta property="og:site_name" content="kyclnx">
+<meta property="og:description" content="RabbitMQ同步通信和异步通信同步通信：实时性强，一个时刻只能对应一个人，类似于打电话 异步通信：同一时刻，可以实现一对多，类似于微信聊天     同步调用：  可以立刻得到响应的结果，时效性强。  拓展性差。性能下降。级联失败。   异步调用： 异步调用方式其实就是基于消息通知的方式，一般包含三个角色  消息发送者:投递消息的人，就是原来的调用方  消息代理:管理、暂存、转发消息，你可以把它">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3e70ceca883111ebb6edd017c2d2eca2.jpg">
+<meta property="article:published_time" content="2024-09-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-08T10:04:24.802Z">
+<meta property="article:author" content="niajx">
+<meta property="article:tag" content="消息队列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3e70ceca883111ebb6edd017c2d2eca2.jpg">
+  
+  
+  
+  <title>RabbitMQ - kyclnx</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":130,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>kyclnx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3e70ceca883111ebb6edd017c2d2eca2.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RabbitMQ"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-08 00:00" pubdate>
+          2024年9月8日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">RabbitMQ</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h1><h2 id="同步通信和异步通信"><a href="#同步通信和异步通信" class="headerlink" title="同步通信和异步通信"></a>同步通信和异步通信</h2><p>同步通信：实时性强，一个时刻只能对应一个人，类似于打电话</p>
+<p>异步通信：同一时刻，可以实现一对多，类似于微信聊天</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240905152917905.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240905153102577.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>同步调用：</p>
+<ul>
+<li><p>可以立刻得到响应的结果，时效性强。</p>
+</li>
+<li><p>拓展性差。性能下降。级联失败。</p>
+</li>
+</ul>
+<p>异步调用：</p>
+<p>异步调用方式其实就是基于消息通知的方式，一般包含三个角色</p>
+<ul>
+<li><p>消息发送者:投递消息的人，就是原来的调用方</p>
+</li>
+<li><p>消息代理:管理、暂存、转发消息，你可以把它理解成微信服务器</p>
+</li>
+<li><p>消息接收者:接收和处理消息的人，就是原来的服务提供方</p>
+</li>
+</ul>
+<p>优势：</p>
+<ul>
+<li>解除耦合，拓展性强。</li>
+<li>无需等待，性能好。</li>
+<li>故障隔离。</li>
+<li>消息缓存，流量削峰填谷。</li>
+</ul>
+<p>劣势：</p>
+<ul>
+<li>无法立刻得到调用的结果，时效性差。</li>
+<li>不确定下游业务是否执行成功。</li>
+<li>业务安全依赖于broken的可靠性。</li>
+</ul>
+<h2 id="RabbitMQ的安装启动"><a href="#RabbitMQ的安装启动" class="headerlink" title="RabbitMQ的安装启动"></a>RabbitMQ的安装启动</h2><h3 id="docker上安装"><a href="#docker上安装" class="headerlink" title="docker上安装"></a>docker上安装</h3><p>1、下载RabbitMQ的镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull rabbitmq<br></code></pre></td></tr></table></figure>
+
+<p>2、启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo docker run \<br> -e RABBITMQ_DEFAULT_USER=kyclnx \<br> -e RABBITMQ_DEFAULT_PASS=123 \<br> -v rabbitmq-plugins:/plugins \<br> --name rabbitmq \<br> --hostname rabbitmq \<br> -p 15672:15672 \<br> -p 5672:5672 \<br> -d \<br> rabbitmq:latest<br></code></pre></td></tr></table></figure>
+
+<p>指令说明：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo docker run: 基本的Docker命令，用于启动一个新的容器实例<br>-e RABBITMQ_DEFAULT_USER=wuyanzu: 设置RabbitMQ服务的默认用户名为wuyanzu<br>-e RABBITMQ_DEFAULT_PASS=kZoeSW$$xS5i^Cum: 设置RabbitMQ服务的默认密码为bhoLdSvpd0UAOysh<br>-v rabbitmq-plugins:/plugins: 将一个名为rabbitmq-plugins的卷映射到容器的/plugins目录，用于存放RabbitMQ的插件。这里的rabbitmq-plugins是一个卷的名称，而不是宿主机的路径<br>--name rabbitmq: 指定容器的名称为rabbitmq<br>--hostname rabbitmq: 设置容器的主机名为rabbitmq<br>-p 15672:15672: 将宿主机的端口15672映射到容器的端口15672，这是RabbitMQ管理界面的默认端口<br>-p 5672:5672: 将宿主机的端口5672映射到容器的端口5672，这是RabbitMQ用于AMQP协议通信的默认端口<br>-d: 在后台运行容器（守护进程）<br>rabbitmq:latest: 使用最新的RabbitMQ官方镜像来创建容器<br></code></pre></td></tr></table></figure>
+
+<p>尝试访问：http:&#x2F;&#x2F;宿主机ip:15672&#x2F;</p>
+<p>Ubuntu</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo ufw allow 15672<br>sudo ufw allow 5672<br>sudo ufw reload<br></code></pre></td></tr></table></figure>
+
+<p>Centos</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo firewall-cmd --zone=public --add-port=15672/tcp --permanent<br>sudo firewall-cmd --zone=public --add-port=5672/tcp --permanent<br>sudo firewall-cmd --reload<br></code></pre></td></tr></table></figure>
+
+<p>RabbitMQ没有安装web插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo docker exec -it rabbitmq bash<br>rabbitmq-plugins enable rabbitmq_management<br>退出		                                                                                                         <br></code></pre></td></tr></table></figure>
+
+<p>最后通过</p>
+<h2 id="RabbitMQ整体概念"><a href="#RabbitMQ整体概念" class="headerlink" title="RabbitMQ整体概念"></a>RabbitMQ整体概念</h2><ul>
+<li>publisher:消息发送者</li>
+<li>consumer:消息的消费者</li>
+<li>queue:队列，存储消息</li>
+<li>exange:交换机，负责路由消息</li>
+<li>virtual-host，虚拟主机，起到了数据隔离的作用。</li>
+</ul>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240905173320655.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><p>需求:在RabbitMQ的控制台完成下列操作:</p>
+<ul>
+<li>新建队列hello.queue1和hello.queue2</li>
+<li>向默认的amp.fanout交换机发送一条消息</li>
+<li>查看消息是否到达hello.queue1和hello.queue2</li>
+</ul>
+<p>总结：</p>
+<p>1、如果交换机和队列没有绑定，我们直接向着交换机发送消息，不能发送成功。</p>
+<p>交换机不能存储消息，只能路由和转发消息。</p>
+<p>2、一旦绑定两个队列在交换机上面，交换机发送消息，两个队列均可收到消息（广播）</p>
+<h2 id="数据隔离"><a href="#数据隔离" class="headerlink" title="数据隔离"></a>数据隔离</h2><p>需求:在RabbitMQ的控制台完成下列操作</p>
+<ul>
+<li>新建一个用户hmall。</li>
+<li>为hmall用户创建一个virtual host。</li>
+<li>测试不同virtualhost之间的数据隔离现象。</li>
+</ul>
+<h2 id="java客户端快速入门"><a href="#java客户端快速入门" class="headerlink" title="java客户端快速入门"></a>java客户端快速入门</h2><h3 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h3><p>test中的包的包名要和模块下的包名一致，队列名字也要一致</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.itheima.publisher;<br><span class="hljs-keyword">import</span> org.junit.jupiter.api.Test;<br><span class="hljs-keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.boot.test.context.SpringBootTest;<br><span class="hljs-meta">@SpringBootTest</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringAmqpTest</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSendMessage2Queue</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">queueName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello.queue1&quot;</span>;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello, qmqp&quot;</span>;<br>        rabbitTemplate.convertAndSend(queueName, msg);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>打开localhost:15672的queue队列可以看得到发送的消息</p>
+<h3 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.itheima.consumer.listeners;<br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MqListener</span> &#123;<br>    <span class="hljs-meta">@RabbitListener(queues = &quot;hello.queue1&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listenSimpleQueue</span><span class="hljs-params">(String msg)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;消费者收到simple,queue的消息【&quot;</span>+msg+<span class="hljs-string">&quot;】&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://gitee.com/kyclnx/rabbitmq">kyclnx&#x2F;mq (gitee.com)</a></p>
+<h3 id="java客户端-Work模型"><a href="#java客户端-Work模型" class="headerlink" title="java客户端-Work模型"></a>java客户端-Work模型</h3><p>Workqueues，任务模型。简单来说就是让多个消费者绑定到一个队列，共同消费队列中的消息。</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240907145537008.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>基本思路如下：<br>1.在RabbitMQ的控制台创建一个队列，名为工作队列<br>2.在Publisher服务中定义测试方法，在1秒内产生50条消息，发送到Work.Queue<br>3.在Consumer服务中定义两个消息监听者，都监听Work.Queue队列<br>4.消费者1每秒处理50条消息，消费者2每秒处理5条消息。</p>
+<p>消费者消息推送限制<br>默认情况下，RabbitMO的会将消息依次轮询投递给绑定在队列上的每一个消费者。但这并没有考虑到消费者是否已经处理完消息，可能出现消息堆积。<br>因此我们需要修改application.yml，设置preFetch值为1，确保同一时刻最多投递给消费者1条消息。</p>
+<p>work模型的使用：</p>
+<ul>
+<li>多个消费者绑定到一个队列可以加快消息的处理速率。</li>
+<li>同一个消息只会被一个消费者来处理</li>
+<li>通过prefetch来控制消费者预处理消息的数量，处理完一条再处理下一条，实现能者多劳</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/kyclnx/rabbitmq/tree/test1/">https://gitee.com/kyclnx/rabbitmq/tree/test1/</a></p>
+<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><h3 id="Fanout交换机"><a href="#Fanout交换机" class="headerlink" title="Fanout交换机"></a>Fanout交换机</h3><p>真正生产环境都会经过exchange来发送消息，而不是直接发送到队列，交换机的类型有以下三种:</p>
+<ul>
+<li>Fanout:广播</li>
+<li>Direct:定向</li>
+<li>Topic:话题</li>
+</ul>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240907153629304.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>利用SpringAMQP演示FanoutExchange的使用<br>实现思路如下:<br>1.在RabbitMO控制台中，声明队列fanout.queue1和fanout.queue2<br>2.在RabbitMQ控制台中，声明交换机hmall.fanout，将两个队列与其绑定<br>3.在consumer服务中，编写两个消费者方法，分别监听fanout.queue1和fanout.queue2<br>4.在publisher中编写测试方法，向hmall.fanout发送消息</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/kyclnx/rabbitmq/tree/test2/">https://gitee.com/kyclnx/rabbitmq/tree/test2/</a></p>
+<h3 id="direct交换机"><a href="#direct交换机" class="headerlink" title="direct交换机"></a>direct交换机</h3><p>Direct Exchange 会将接收到的消息根据规则路由到指定的Queue，因此称为定向路由。</p>
+<ul>
+<li>每一个Queue都与Exchange设置一个BindingKey</li>
+<li>发布者发送消息时，指定消息的RoutingKey</li>
+<li>Exchange将消息路由到BindingKey与消息RoutingKey一致的队列</li>
+<li>在publisher中编写测试方法，利用不同的RoutingKey向hmall.direct发送消息</li>
+</ul>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240907164109401.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h3 id="Topic-交换机"><a href="#Topic-交换机" class="headerlink" title="Topic 交换机"></a>Topic 交换机</h3><p>TopicExchange与DirectExchange类似，区别在于routingKey可以是多个单词的列表，并且以.分割。</p>
+<p>Queue与Exchange指定BindingKey时可以使用通配符</p>
+<ul>
+<li>#:代指0个或多个单词</li>
+<li>*：代指一个单词</li>
+</ul>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240907165156885.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>需求如下:<br>1.在RabbitMQ控制台中，声明队列topic.queue1和topic.queue2<br>2.在RabbitMQ控制台中，声明交换机hmall.topic，将两个队列与其绑定<br>3.在consumer服务中，编写两个消费者方法，分别监听topic.queue1和topic.queue2<br>4.在publisher中编写测试方法，利用不同的RoutingKey向hmall.topic发送消息</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/image-20240907165322622.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>java客户端声明队列</p>
+<p>声明队列和交换机</p>
+<ul>
+<li>SpringAMQP提供了几个类，用来声明队列、交换机及其绑定关系:</li>
+<li>Queue:用于声明队列，可以用工厂类QueueBuilder构建</li>
+<li>Exchange:用于声明交换机，可以用工厂类ExchangeBuilder构建</li>
+<li>Binding:用于声明队列和交换机的绑定关系，可以用工厂类BindingBuilder构建</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%AD%E9%97%B4%E9%94%AE/" class="category-chain-item">中间键</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="print-no-link">#消息队列</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RabbitMQ</div>
+      <div>http://example.com/2024/09/08/RabbitMq/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>niajx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/31/Linux-PORT/" title="PORT AND PROCESS">
+                        <span class="hidden-mobile">PORT AND PROCESS</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
