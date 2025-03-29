@@ -29,6 +29,31 @@
   
   
   <entry>
+    <title>git操作</title>
+    <link href="/2025/03/29/git/"/>
+    <url>/2025/03/29/git/</url>
+    
+    <content type="html"><![CDATA[<p>gitignore一忽略文件的版本跟踪<br>模式。</p><ul><li>空行不匹配任何文件，因此常用作分隔符(以方便阅读)</li><li>#用于注释，\表示转义(如需使用实体\，则要加引号”&quot;)</li><li>*可以匹配任何字符(0或多次)，?可以匹配任何字符(1次)。(注意:它们都不可以匹配&#x2F;)</li><li>&#x2F;用于分隔目录:</li><li>当&#x2F;在开头时，表示从.gitignore文件所在目录开始匹配。否则，下级都将匹配。</li><li>当&#x2F;在末尾时，只匹配目录，否则，则同名的目录和文件都将匹配。</li></ul><p>&#x2F;ax(只匹配根目录下或者，当前文件目录下的ax)</p><p>ax(所有ax)</p><p>.gitignore文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">target/<br>.idea/<br>.vscode/<br>/src/main/resources/static/edu/node_modules/<br><span class="hljs-meta prompt_"># </span><span class="language-bash">在这里就不忽略.gitignore文件了</span><br></code></pre></td></tr></table></figure><p>检测查看文件有没有被忽略掉</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">PS F:\java_practice\et-master&gt; git check-ignore -v .\src\main\resources\static\edu-xust\node_modules\<br>.gitignore:6:   &quot;.\\src\\main\\resources\\static\\edu-xust\\node_modules\\&quot;<br>PS F:\java_practice\et-master&gt; git check-ignore -v .\src\main\resources\static\edu-xust\node_modules<br>PS F:\java_practice\et-master&gt; git check-ignore -v .\src\main\resources\static\edu-xust\node_modules\<br>.gitignore:6:   &quot;.\\src\\main\\resources\\static\\edu-xust\\node_modules\\&quot;<br></code></pre></td></tr></table></figure><p>.gitignore 只能忽略那些没有被追踪的文件，所以先纳入版本管理后写入.gitignore 是无效的。</p><p>但是还想补一下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">先删除本地缓存<br>git rm -r --cached<br>git add .<br>git status<br></code></pre></td></tr></table></figure><p>平常操作步奏</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell">git init<br><span class="hljs-meta prompt_">#</span><span class="language-bash">仓库名称尽量使用ssh的那一个</span><br>git remote add origin 仓库名称<br><span class="hljs-meta prompt_">#</span><span class="language-bash">当前配置的远程仓库</span><br>git remote -v   <br><span class="hljs-meta prompt_"># </span><span class="language-bash">创建并且切换分支</span><br>git checkout -b 本地分支名称<br><span class="hljs-meta prompt_"># </span><span class="language-bash">创建失误了，删除本地分支（需要切换到其他的分支上去）</span><br>git branch -d 分支名称 <br>git add .<br><span class="hljs-meta prompt_"># </span><span class="language-bash">如果添加了想撤回</span><br>git reset<br><span class="hljs-meta prompt_"># </span><span class="language-bash">撤销指定文件</span><br>git reset [文件名]<br>git push --set-upstream origin [分支名]<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>git</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>sql连接和groupBy</title>
     <link href="/2024/11/24/MySQL2/"/>
     <url>/2024/11/24/MySQL2/</url>
