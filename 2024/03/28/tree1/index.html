@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/save_picture/OIP.jpg">
+  <link rel="icon" href="/img/save_picture/OIP.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="nianjx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="主要是对于递归的理解没有很透彻 二叉搜索树二叉搜索树（Binary Search Tree, BST）是一种很常见的二叉树。它的定义是： 一个二叉树中任意节点的值要大于等于所有左子树节点的值，且要小于等于右边子树所有节点的值 100. 相同的树 - 力扣（LeetCode） 1234567891011class Solution &amp;#123;    public boolean isSameTre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉搜索树">
+<meta property="og:url" content="http://example.com/2024/03/28/tree1/index.html">
+<meta property="og:site_name" content="kyclnx">
+<meta property="og:description" content="主要是对于递归的理解没有很透彻 二叉搜索树二叉搜索树（Binary Search Tree, BST）是一种很常见的二叉树。它的定义是： 一个二叉树中任意节点的值要大于等于所有左子树节点的值，且要小于等于右边子树所有节点的值 100. 相同的树 - 力扣（LeetCode） 1234567891011class Solution &amp;#123;    public boolean isSameTre">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/9ccb0cf1d612cdd9eb1214e2100ba41a.png">
+<meta property="article:published_time" content="2024-03-28T09:39:30.000Z">
+<meta property="article:modified_time" content="2024-03-29T04:17:23.871Z">
+<meta property="article:author" content="nianjx">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/9ccb0cf1d612cdd9eb1214e2100ba41a.png">
+  
+  
+  
+  <title>二叉搜索树 - kyclnx</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":130,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>kyclnx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/9ccb0cf1d612cdd9eb1214e2100ba41a.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="二叉搜索树"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-28 17:39" pubdate>
+          2024年3月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">二叉搜索树</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>主要是对于递归的理解没有很透彻</p>
+<h1 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h1><p>二叉搜索树（Binary Search Tree, BST）是一种很常见的二叉树。它的定义是： 一个二叉树中任意节点的值要大于等于所有左子树节点的值，且要小于等于右边子树所有节点的值</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/same-tree/">100. 相同的树 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSameTree</span><span class="hljs-params">(TreeNode p, TreeNode q)</span> &#123;<br>        <span class="hljs-keyword">if</span>(p == <span class="hljs-literal">null</span> &amp;&amp; q == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(p == <span class="hljs-literal">null</span> ^ q == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(p.val != q.val) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> isSameTree(q.left, p.left) &amp;&amp;<br>                   isSameTree(q.right, p.right); <br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<p>广度优先搜索</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSameTree</span><span class="hljs-params">(TreeNode p, TreeNode q)</span> &#123;<br>        <span class="hljs-keyword">if</span>(p == <span class="hljs-literal">null</span> &amp;&amp; q == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(p == <span class="hljs-literal">null</span> || q == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        Queue&lt;TreeNode&gt; queue1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;TreeNode&gt;();<br>        Queue&lt;TreeNode&gt; queue2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;TreeNode&gt;();<br>        queue1.offer(p);<br>        queue2.offer(q);<br>        <span class="hljs-keyword">while</span>(!queue1.isEmpty() &amp;&amp; !queue2.isEmpty())&#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">node1</span> <span class="hljs-operator">=</span> queue1.poll();<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">node2</span> <span class="hljs-operator">=</span> queue2.poll();<br>            <span class="hljs-keyword">if</span>(node1.val != node2.val) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">left1</span> <span class="hljs-operator">=</span> node1.left, right1 = node1.right,left2 = node2.left, right2 = node2.right;<br>            <span class="hljs-keyword">if</span>(left1 == <span class="hljs-literal">null</span> ^ left2 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span>(right1 == <span class="hljs-literal">null</span> ^ right2 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span>(left1 != <span class="hljs-literal">null</span>) queue1.offer(left1);<br>            <span class="hljs-keyword">if</span>(right1 != <span class="hljs-literal">null</span>) queue1.offer(right1);<br>            <span class="hljs-keyword">if</span>(left2 != <span class="hljs-literal">null</span>) queue2.offer(left2);<br>            <span class="hljs-keyword">if</span>(right2 != <span class="hljs-literal">null</span>) queue2.offer(right2);<br>        &#125;<br>        <span class="hljs-keyword">return</span> queue1.isEmpty() &amp;&amp; queue2.isEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>判定是否一个二叉树中任意节点的值要大于等于所有左子树节点的值，且小于等于右边子树所有节点的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValidBST</span><span class="hljs-params">(Node root)</span>&#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (root.l != <span class="hljs-literal">null</span> &amp;&amp; root.val &lt;= root.l.val) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (root.r != <span class="hljs-literal">null</span> &amp;&amp; root.val &gt;= root.r.val) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">return</span> isValidBST(root.l) &amp;&amp; isValidBST(root.r);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>但是这个算法出现了一定的错误，BST的每一个节点应该要小于右边子数的所有节点，下面这个二叉树显然不是BST，但是上述算法会将其判定为BST</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240326182119.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<p>重新看一下BST的定义，Root做的并不只是和左右节点的比较，而是需要和整个左子树和右子树的所有节点进行比较。这种情况下我们可以使用辅助函数，增加函数参数列表。在参数中携带额外信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid_BST</span><span class="hljs-params">(Node root, Node min, Node max)</span>&#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">if</span> (min != <span class="hljs-literal">null</span> &amp;&amp; root.val &lt;= min.val) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span>(max != <span class="hljs-literal">null</span> &amp;&amp; root.val &gt;= max.val) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">return</span> isValid_BST(root.left, min, root) &amp;&amp; isValid_BST(root.right, root, max);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/submissions/517714155/">98. 验证二叉搜索树 - 力扣（LeetCode）</a></p>
+<p>根据二叉树的性质，在递归调用左子树时候，将上界改为root</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValidBST</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">return</span> judge(root, Long.MAX_VALUE, Long.MIN_VALUE);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">judge</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">long</span> max, <span class="hljs-type">long</span> min)</span>&#123;<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-comment">//这里是或</span><br>        <span class="hljs-keyword">if</span>(root.val &gt;= max || root.val &lt;= min) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-comment">//判断左边，将上界修改为root.val                  判断右边将下界改为root.val</span><br>        <span class="hljs-keyword">return</span> judge(root.left, root.val, min) &amp;&amp; judge(root.right, max, root.val);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="一：在BST中查找一个数字是否存在"><a href="#一：在BST中查找一个数字是否存在" class="headerlink" title="一：在BST中查找一个数字是否存在"></a>一：在BST中查找一个数字是否存在</h2><p>根据我们的指导思想，我们可以这样写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isInBST</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> target)</span>&#123;<br>    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span>(root.val == target) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">return</span> isInBST(root.left, target)|| isInBST(root.right, target);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样写完全正确但是如何将BST“左小右大”的特性运用上？</p>
+<p>很简单，其实不需要这样递归的左右两边搜索，类似于二分查找的思想，根据target和root.val的大小进行比较，就能排除一边。我们将上面的思路稍稍改动一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">boolean</span> <span class="hljs-title function_">isInBST</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> target)</span>&#123;<br>    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span>(root.val == target) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">if</span>(root.val &lt; target) <span class="hljs-keyword">return</span> isInBST(root.right, target);<br>    <span class="hljs-keyword">if</span>(root.val &gt; target) <span class="hljs-keyword">return</span> isInBST(root.left, target);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/submissions/517709057/">700. 二叉搜索树中的搜索 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">searchBST</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> tar)</span> &#123;<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span> || root.val == tar) <span class="hljs-keyword">return</span> root;<br>        <span class="hljs-keyword">return</span> root.val &gt; tar? searchBST(root.left, tar) : searchBST(root.right, tar);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="二、在BST中插入一个数字"><a href="#二、在BST中插入一个数字" class="headerlink" title="二、在BST中插入一个数字"></a>二、在BST中插入一个数字</h2><p>对于数据结构的操作无非是<code>遍历</code>+<code>访问</code>，遍历就是“找”，访问就是“改”。具体到这个问题，插入一个数字，就是先找到插入位置，然后进行插入操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">TreeNode <span class="hljs-title function_">insertIntoBST</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> val)</span>&#123;<br>    <span class="hljs-comment">//找到空位置，插入节点</span><br>    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(val);<br>    <span class="hljs-comment">// if(root.val == val) </span><br>    <span class="hljs-comment">// BST中一般不会插入已存在的元素</span><br>    <span class="hljs-keyword">if</span>(root.val &lt; val) root.right = insertIntoBST(root.right, val);<br>    <span class="hljs-keyword">if</span>(root.val &gt; val) root.left = insertIntoBST(root.left, val);<br>    <span class="hljs-keyword">return</span> root;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/description/">701. 二叉搜索树中的插入操作 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">insertIntoBST</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> val)</span> &#123;<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(val);<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &lt; val) root.right = insertIntoBST(root.right,val);<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &gt; val) root.left = insertIntoBST(root.left,val);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="三、在BST中删除一个数字"><a href="#三、在BST中删除一个数字" class="headerlink" title="三、在BST中删除一个数字"></a>三、在BST中删除一个数字</h2><p>这个问题有一点复杂，跟插入的操作优点类似，先找然后再改。先将框架写出来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">TreeNode <span class="hljs-title function_">deleteNode</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> key)</span>&#123;<br>    <span class="hljs-keyword">if</span>(root.val == key)&#123;<br>        <span class="hljs-comment">//找到了，进行删除操作</span><br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &gt; key)&#123;<br>        root.left = deleteNode(root.left, key);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &lt; key)&#123;<br>        root.right = deleteNode(root.right, key);<br>    &#125;<br>    <span class="hljs-keyword">return</span> root;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>找到了这个节点，比方说是节点A，如何将这个节点进行删除，这是难点。因为删除节点的同时不能破环BST的性质。有三种情况，这里使用图片进行说明。</p>
+<p>情况一：恰好是末端节点，两个子节点都为空，那么它可以当场去世了。</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240328154229.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(root.left == <span class="hljs-literal">null</span> &amp;&amp; root.right == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br></code></pre></td></tr></table></figure>
+
+<p>情况二：A只有一个孩子节点，那么就让它的孩子节点接他的班</p>
+<img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240328154452.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//排除了情况一之后</span><br><span class="hljs-keyword">if</span>(root.left == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> root.right;<br><span class="hljs-keyword">if</span>(root.right == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> root.left;<br></code></pre></td></tr></table></figure>
+
+<p>情况三：A具有两个子节点，为了不破环BST的性质，A必须找到左子树中最大的那一个节点或者右子树中最小的那一个节点来接替自己。</p>
+<p><img src="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/20240328154909.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(root.left != <span class="hljs-literal">null</span> &amp;&amp; root.right != <span class="hljs-literal">null</span>)&#123;<br>    <span class="hljs-comment">//找到右子树的最小节点</span><br>    <span class="hljs-type">TreeNode</span> <span class="hljs-variable">minNode</span> <span class="hljs-operator">=</span> getMin(root.right);<br>    <span class="hljs-comment">//将root改成minNode</span><br>    root.val = minNode.val;<br>    <span class="hljs-comment">//转而删除minNode</span><br>    root.right = delete(root.right, minNode.val);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>三种情况分析完毕，填入框架，简化一下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java">TreeNode <span class="hljs-title function_">deleteNode</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> key)</span>&#123;<br>    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">if</span>(root.val == key) &#123;<br>        <span class="hljs-comment">//将情况一和情况二均处理了</span><br>        <span class="hljs-keyword">if</span>(root.left == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> root.right;<br>	    <span class="hljs-keyword">if</span>(root.right == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> root.left;<br>        <span class="hljs-comment">//处理情况三</span><br>    	<span class="hljs-comment">//找到右子树的最小节点</span><br>    	<span class="hljs-type">TreeNode</span> <span class="hljs-variable">minNode</span> <span class="hljs-operator">=</span> getMin(root.right);<br>    	<span class="hljs-comment">//将root改成minNode</span><br>    	root.val = minNode.val;<br>    	<span class="hljs-comment">//转而删除minNode</span><br>    	root.right = deleteNode(root.right, minNode.val);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &gt; key)&#123;<br>        root.left = deleteNode(root.left, key);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &lt; key)&#123;<br>        root.right = deleteNode(root.right, key);<br>    &#125;<br>    <span class="hljs-keyword">return</span> root;<br>&#125;<br>TreeNode <span class="hljs-title function_">getMin</span><span class="hljs-params">(TreeNode node)</span>&#123;<br>    <span class="hljs-comment">//BST的最左边就是最小的</span><br>    <span class="hljs-keyword">while</span>(node.left != <span class="hljs-literal">null</span>) node = node.left;<br>    <span class="hljs-keyword">return</span> node;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-node-in-a-bst/submissions/517689274/">450. 删除二叉搜索树中的节点 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">deleteNode</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> key)</span> &#123;<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> root;<br>        <span class="hljs-keyword">if</span>(root.val == key)&#123;<br>            <span class="hljs-keyword">if</span>(root.left == <span class="hljs-literal">null</span> &amp;&amp; root.right == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>            <span class="hljs-keyword">if</span>(root.left == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> root.right;<br>            <span class="hljs-comment">//可以理解为这层循环递归调用root返回root.left就相当于删除了left</span><br>            <span class="hljs-keyword">if</span>(root.right == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> root.left;<br>            <span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-type">TreeNode</span> <span class="hljs-variable">min_Node</span> <span class="hljs-operator">=</span> getMin(root.right);<br>                root.val = min_Node.val;<br>                <span class="hljs-comment">//递归调用删除min_Node</span><br>                root.right = deleteNode(root.right, min_Node.val);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &gt; key)&#123;<br>            root.left = deleteNode(root.left, key);<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root.val &lt; key)&#123;<br>            root.right = deleteNode(root.right, key);<br>        &#125;<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">getMin</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-comment">// 一个二叉搜索树中的最小值就是最左边的那一个</span><br>        <span class="hljs-keyword">while</span> (root.left != <span class="hljs-literal">null</span>)<br>            root = root.left;<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>二叉搜索树</div>
+      <div>http://example.com/2024/03/28/tree1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>nianjx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/31/str5/" title="字符串篇五">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">字符串篇五</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/24/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Java新特性">
+                        <span class="hidden-mobile">Java新特性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

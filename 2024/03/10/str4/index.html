@@ -1,0 +1,698 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/save_picture/OIP.jpg">
+  <link rel="icon" href="/img/save_picture/OIP.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="nianjx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="数字与字符间的转换Integer.parseInt(a);将a转换成int类型 Integer.toString(a);将a转换成String类型 int[] cp &#x3D; score.clone();将数组score的值赋给cp 299. 猜数字游戏 - 力扣（LeetCode）  这个题说白了还是统计字符类别的  123456789101112131415161718192021clas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串篇四">
+<meta property="og:url" content="http://example.com/2024/03/10/str4/index.html">
+<meta property="og:site_name" content="kyclnx">
+<meta property="og:description" content="数字与字符间的转换Integer.parseInt(a);将a转换成int类型 Integer.toString(a);将a转换成String类型 int[] cp &#x3D; score.clone();将数组score的值赋给cp 299. 猜数字游戏 - 力扣（LeetCode）  这个题说白了还是统计字符类别的  123456789101112131415161718192021clas">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3gbizhiCom-1709181669.jpg">
+<meta property="article:published_time" content="2024-03-10T01:18:30.000Z">
+<meta property="article:modified_time" content="2024-09-20T04:16:30.806Z">
+<meta property="article:author" content="nianjx">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3gbizhiCom-1709181669.jpg">
+  
+  
+  
+  <title>字符串篇四 - kyclnx</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":130,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>kyclnx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://kyclnx.oss-cn-hangzhou.aliyuncs.com/kyclnx/3gbizhiCom-1709181669.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="字符串篇四"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-10 09:18" pubdate>
+          2024年3月10日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">字符串篇四</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="数字与字符间的转换"><a href="#数字与字符间的转换" class="headerlink" title="数字与字符间的转换"></a>数字与字符间的转换</h1><p>Integer.parseInt(a);将a转换成int类型</p>
+<p>Integer.toString(a);将a转换成String类型</p>
+<p>int[] cp &#x3D; score.clone();将数组score的值赋给cp</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/bulls-and-cows/description/">299. 猜数字游戏 - 力扣（LeetCode）</a></p>
+<ul>
+<li>这个题说白了还是统计字符类别的</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getHint</span><span class="hljs-params">(String secret, String guess)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">bulls</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span>[] cntS = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>];<br>        <span class="hljs-type">int</span>[] cntG = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; secret.length(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(secret.charAt(i) == guess.charAt(i)) ++bulls;<br>            <span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-comment">//这里相当于统计字符</span><br>                ++cntS[secret.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>];<br>                ++cntG[guess.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">cows</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; ++i)&#123;<br>            <span class="hljs-comment">//理解一个点cntG[i], cntS[i]在同一位置上的字符肯定是相等的</span><br>            cows += Math.min(cntG[i], cntS[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> Integer.toString(bulls) + <span class="hljs-string">&quot;A&quot;</span> + Integer.toString(cows) + <span class="hljs-string">&quot;B&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fizz-buzz/description/">412. Fizz Buzz - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">fizzBuzz</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        List&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) cur += <span class="hljs-string">&quot;Fizz&quot;</span>;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) cur += <span class="hljs-string">&quot;Buzz&quot;</span>;<br>            <span class="hljs-keyword">if</span> (cur.length() == <span class="hljs-number">0</span>) cur = i + <span class="hljs-string">&quot;&quot;</span>;<br>            ans.add(cur);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/relative-ranks/description/">506. 相对名次 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    String[] ss = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]&#123;<span class="hljs-string">&quot;Gold Medal&quot;</span>, <span class="hljs-string">&quot;Silver Medal&quot;</span>, <span class="hljs-string">&quot;Bronze Medal&quot;</span>&#125;;<br>    <span class="hljs-keyword">public</span> String[] findRelativeRanks(<span class="hljs-type">int</span>[] score) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> score.length;<br>        String[] ret = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[n];<br>        <span class="hljs-type">int</span>[] clone = score.clone();<br>        Arrays.sort(clone);<br>        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) map.put(clone[i], n - <span class="hljs-number">1</span> - i);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">rank</span> <span class="hljs-operator">=</span> map.get(score[i]);<br>            ret[i] = rank &lt; <span class="hljs-number">3</span> ? ss[rank] : String.valueOf(rank + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-time-difference/">539. 最小时间差 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMinDifference</span><span class="hljs-params">(List&lt;String&gt; timePoints)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> timePoints.size() * <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span>; i &lt; n / <span class="hljs-number">2</span>; i++, idx += <span class="hljs-number">2</span>) &#123;<br>            String[] ss = timePoints.get(i).split(<span class="hljs-string">&quot;:&quot;</span>);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> Integer.parseInt(ss[<span class="hljs-number">0</span>]), m = Integer.parseInt(ss[<span class="hljs-number">1</span>]);<br>            nums[idx] = h * <span class="hljs-number">60</span> + m;<br>            nums[idx + <span class="hljs-number">1</span>] = nums[idx] + <span class="hljs-number">1440</span>;<br>        &#125;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> nums[<span class="hljs-number">1</span>] - nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) ans = Math.min(ans, nums[i + <span class="hljs-number">1</span>] - nums[i]);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;	<br></code></pre></td></tr></table></figure>
+
+<p><code>substring（）</code>当有两个参数的时候左闭右开区间，当只有一个参数的时候从这个参数开始(闭区间)一直到字符结束位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">ss</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abcdefg&quot;</span>;<br>String e= ss.substring(<span class="hljs-number">0</span>,<span class="hljs-number">3</span>);<br><span class="hljs-type">String</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> ss.substring(<span class="hljs-number">5</span>);<br>System.out.println(<span class="hljs-string">&quot;两个参数：&quot;</span> +e);             \\两个参数：abc<br>System.out.println(<span class="hljs-string">&quot;一个参数：&quot;</span> + c);            \\一个参数：fg<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMinDifference</span><span class="hljs-params">(List&lt;String&gt; timePoints)</span> &#123;<br>        <span class="hljs-type">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[timePoints.size()];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; arr.length; i++)&#123;<br>            <span class="hljs-comment">// System.out.println(timePoints.get(i).substring(0, 2));</span><br>            <span class="hljs-comment">// System.out.println(timePoints.get(i).substring(3));</span><br>            arr[i] = Integer.parseInt(timePoints.get(i).substring(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>))*<span class="hljs-number">60</span> + Integer.parseInt(timePoints.get(i).substring(<span class="hljs-number">3</span>));<br>        &#125;<br>        <span class="hljs-comment">// System.out.println(Arrays.toString(arr));</span><br>        Arrays.sort(arr);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; arr.length; i++) min = Math.min(min, arr[i] - arr[i - <span class="hljs-number">1</span>]);<br>        <br>        <span class="hljs-keyword">return</span> Math.min(min, arr[<span class="hljs-number">0</span>] + <span class="hljs-number">1440</span> - arr[arr.length - <span class="hljs-number">1</span>]);<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/optimal-division/description/">553. 最优除法 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">optimalDivision</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">bs</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++)&#123;<br>            bs.append(nums[i]);<br>            <span class="hljs-keyword">if</span>(i + <span class="hljs-number">1</span> &lt; n) bs.append(<span class="hljs-string">&quot;/&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span>(n &gt; <span class="hljs-number">2</span>)&#123;<br>            bs.insert(bs.indexOf(<span class="hljs-string">&quot;/&quot;</span>) + <span class="hljs-number">1</span>, <span class="hljs-string">&quot;(&quot;</span>);<br>            bs.append(<span class="hljs-string">&quot;)&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> bs.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/complex-number-multiplication/">537. 复数乘法 - 力扣（LeetCode）</a></p>
+<p><code>.split()</code>方法的解释</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Welcome-To-Shanxi-XiAn&quot;</span>;<br>String[] ss1 = str1.split(<span class="hljs-string">&quot;-&quot;</span>);<br><span class="hljs-comment">//只是限定了分隔符号-所以返回了：[Welcome, To, Shanxi, XiAn]</span><br>System.out.println(Arrays.toString(ss1));<br><br>String[] sss1 = str1.split(<span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-number">2</span>);<br><span class="hljs-comment">//分隔符设置分割份数返回值，因为限定了两个所以返回：[Welcome, To-Shanxi-XiAn]</span><br>System.out.println(Arrays.toString(sss1));<br><br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;www.baidu.com&quot;</span>;<br>String[] ss2 = str2.split(<span class="hljs-string">&quot;\\.&quot;</span>);<br><span class="hljs-comment">//转义字符的返回值：[www, baidu, com]，如果不进行转义就会返回[]。</span><br>System.out.println(Arrays.toString(ss2));<br><br><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;acount=? and uu =? or n=?&quot;</span>;<br>String[] ss3 = str3.split(<span class="hljs-string">&quot;and|or&quot;</span>);<br><span class="hljs-comment">//多个分隔符返回值：[acount=? ,  uu =? ,  n=?]</span><br>System.out.println(Arrays.toString(ss3));<br><br><span class="hljs-type">String</span> <span class="hljs-variable">str4</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1+1i&quot;</span>;<br><span class="hljs-comment">//通过\\进行转义并通过|进行分隔返回值：[1, 1]</span><br>String[] ss4 = str4.split(<span class="hljs-string">&quot;\\+|i&quot;</span>);<br>System.out.println(Arrays.toString(ss4));<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">complexNumberMultiply</span><span class="hljs-params">(String num1, String num2)</span> &#123;<br>        String[] ss1 = num1.split(<span class="hljs-string">&quot;\\+|i&quot;</span>), ss2 = num2.split(<span class="hljs-string">&quot;\\+|i&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> parse(ss1[<span class="hljs-number">0</span>]), b = parse(ss1[<span class="hljs-number">1</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> parse(ss2[<span class="hljs-number">0</span>]), d = parse(ss2[<span class="hljs-number">1</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">A</span> <span class="hljs-operator">=</span> a * c - b * d, B = b * c + a * d;<br>        <span class="hljs-keyword">return</span> A + <span class="hljs-string">&quot;+&quot;</span> + B + <span class="hljs-string">&quot;i&quot;</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">parse</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">return</span> Integer.parseInt(s);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/string-compression/description/">443. 压缩字符串 - 力扣（LeetCode）</a></p>
+<p>代码整的没太懂</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compress</span><span class="hljs-params">(<span class="hljs-type">char</span>[] cs)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> i;<br>            <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; cs[idx] == cs[i]) idx++;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> idx - i;<br>            cs[j++] = cs[i];<br>            <span class="hljs-keyword">if</span> (cnt &gt; <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> j, end = start;<br>                <span class="hljs-keyword">while</span> (cnt != <span class="hljs-number">0</span>) &#123;<br>                    cs[end++] = (<span class="hljs-type">char</span>)((cnt % <span class="hljs-number">10</span>) + <span class="hljs-string">&#x27;0&#x27;</span>);<br>                    cnt /= <span class="hljs-number">10</span>;<br>                &#125;<br>                reverse(cs, start, end - <span class="hljs-number">1</span>);<br>                j = end;<br>            &#125;<br>            i = idx;<br>        &#125;<br>        <span class="hljs-keyword">return</span> j;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">reverse</span><span class="hljs-params">(<span class="hljs-type">char</span>[] cs, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> &#123;<br>        <span class="hljs-keyword">while</span> (start &lt; end) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> cs[start];<br>            cs[start] = cs[end];<br>            cs[end] = t;<br>            start++; end--;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/roman-to-integer/submissions/516216930/">13. 罗马数字转整数 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">romanToInt</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] gra1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">50</span>,<span class="hljs-number">100</span>,<span class="hljs-number">500</span>,<span class="hljs-number">1000</span>&#125;;<br>        <span class="hljs-type">char</span>[] gra2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[]&#123;<span class="hljs-string">&#x27;I&#x27;</span>, <span class="hljs-string">&#x27;V&#x27;</span>, <span class="hljs-string">&#x27;X&#x27;</span>, <span class="hljs-string">&#x27;L&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;D&#x27;</span>, <span class="hljs-string">&#x27;M&#x27;</span>&#125;;<br>        Map&lt;Character, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">7</span>; i++) map.put(gra2[i], gra1[i]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt; -<span class="hljs-number">1</span>; i--)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">v</span> <span class="hljs-operator">=</span> map.get(s.charAt(i));<br>            <span class="hljs-keyword">if</span>(v &gt;= max)&#123;<br>                ans += v;<br>                max = v;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                ans -= v;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-to-roman/">12. 整数转罗马数字 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">intToRoman</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;<br>        <span class="hljs-type">int</span>[] value = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>, <span class="hljs-number">90</span>, <span class="hljs-number">100</span>, <span class="hljs-number">400</span>, <span class="hljs-number">500</span>, <span class="hljs-number">900</span>,<span class="hljs-number">1000</span>&#125;;<br>        String[] key = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]&#123;<span class="hljs-string">&quot;I&quot;</span>, <span class="hljs-string">&quot;IV&quot;</span>, <span class="hljs-string">&quot;V&quot;</span>, <span class="hljs-string">&quot;IX&quot;</span>, <span class="hljs-string">&quot;X&quot;</span>, <span class="hljs-string">&quot;XL&quot;</span>, <span class="hljs-string">&quot;L&quot;</span>, <span class="hljs-string">&quot;XC&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>,<span class="hljs-string">&quot;CD&quot;</span>,<span class="hljs-string">&quot;D&quot;</span>, <span class="hljs-string">&quot;CM&quot;</span>,<span class="hljs-string">&quot;M&quot;</span>&#125;;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">ret</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span>value.length - <span class="hljs-number">1</span>; i &gt; -<span class="hljs-number">1</span>; i--)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> value[i];<br>            <span class="hljs-type">String</span> <span class="hljs-variable">symbol</span> <span class="hljs-operator">=</span> key[i];<br>            <span class="hljs-keyword">while</span>(num &gt;= val)&#123;<br>                num -= val;<br>                ret.append(symbol);<br>            &#125;<br>            <span class="hljs-keyword">if</span>(num == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/magical-string/submissions/516229608/">481. 神奇字符串 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">magicalString</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-comment">//这里定义n + 2大小的目的是防止while循环里j++加了两次而造成数组越界</span><br>        <span class="hljs-type">int</span>[] cnt = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">2</span>];<br>        cnt[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>; cnt[<span class="hljs-number">1</span>] = cnt[<span class="hljs-number">2</span>] = <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">3</span>, i = <span class="hljs-number">2</span>, c = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">while</span>(j &lt; n)&#123;<br>            c ^= <span class="hljs-number">3</span>;<br>            cnt[j++] = c;<br>            <span class="hljs-keyword">if</span>(cnt[i++] == <span class="hljs-number">2</span>) cnt[j++] = c;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; b &lt; n; b++) ans += <span class="hljs-number">2</span> - cnt[b];<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的这种方法太过于难以像到了，尤其是 <code>C ^= 3</code> 这一句。使用下面进行模拟就比较容易理解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">magicalString</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>		<span class="hljs-type">StringBuilder</span> <span class="hljs-variable">bs</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(<span class="hljs-string">&quot;122&quot;</span>);<br>		<span class="hljs-type">String</span> <span class="hljs-variable">BLX</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1&quot;</span>;<br>		<span class="hljs-comment">//这里注意一定是从2开始的，脑子又不灵光了</span><br>		<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>		<span class="hljs-keyword">while</span> (x &lt; n)&#123;<br>			<span class="hljs-keyword">if</span> (bs.charAt(x) == <span class="hljs-string">&#x27;1&#x27;</span>) bs.append(BLX.repeat(<span class="hljs-number">1</span>));<br>			<span class="hljs-keyword">else</span> bs.append(BLX.repeat(<span class="hljs-number">2</span>));<br>            <span class="hljs-comment">//这一句这样写感觉有一点丑陋</span><br>			BLX = BLX == <span class="hljs-string">&quot;1&quot;</span> ? <span class="hljs-string">&quot;2&quot;</span> : <span class="hljs-string">&quot;1&quot;</span>;<br>            <span class="hljs-comment">//BLX = BLX.equals(&quot;1&quot;) ? &quot;2&quot; : &quot;1&quot;;</span><br>			x++;<br>		&#125;<br>		System.out.println(bs.toString());<br>		<span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) ans += <span class="hljs-string">&#x27;2&#x27;</span> - bs.charAt(i) ;<br>		<span class="hljs-keyword">return</span> ans;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的这种方法对于方法的使用和利用很好</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>字符串篇四</div>
+      <div>http://example.com/2024/03/10/str4/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>nianjx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/18/cn_%E7%BD%91%E7%BB%9C%E5%B1%8201%EF%BC%8C02.2.2/" title="网络层1~2.2.2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络层1~2.2.2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/06/cn_%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" title="第三章节">
+                        <span class="hidden-mobile">第三章节</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
